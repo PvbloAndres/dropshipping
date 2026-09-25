@@ -17,6 +17,8 @@ const TIENDA = {
   plazoEntrega: "1 a 3 días hábiles",
   // Métodos que aceptas. "Pago contra entrega" solo si tu proveedor es Dropi.
   metodosPago: ["Transferencia bancaria", "Mercado Pago (tarjeta o débito)", "Pago contra entrega"],
+  // "Llévate también": ids de productos baratos que se ofrecen dentro del carrito.
+  sugerenciasCarrito: ["rollos-bolsas", "varita-gato"],
 };
 
 const CATEGORIAS = [
@@ -37,6 +39,10 @@ const CATEGORIAS = [
 //                 Son estimaciones: confírmalas en Dropi/AliExpress antes de publicar.
 //   buscar      → SOLO PARA TI: qué escribir en el buscador del proveedor.
 //   linkPago    → link de pago de Mercado Pago del producto (opcional).
+//   opciones    → (opcional) lista de tallas o variantes; el cliente elige una antes de agregar.
+//   complemento → (opcional) true = no aparece en el catálogo, solo como "Llévate también" en el
+//                 carrito y siempre junto a otro producto. Su precio NO incluye envío, así que debe
+//                 ser del MISMO proveedor que tus productos principales para que viaje en el mismo paquete.
 const PRODUCTOS = [
   {
     id: "botella-paseo",
@@ -54,6 +60,27 @@ const PRODUCTOS = [
     ],
     costo: 7500,
     buscar: "botella agua portátil perro dispensador",
+    linkPago: "",
+  },
+  {
+    id: "arnes-antitirones",
+    categoria: "paseo",
+    nombre: "Arnés antitirones",
+    precio: 19990,
+    emoji: "🦮",
+    imagen: "",
+    etiqueta: "Nuevo",
+    descripcion: "Tu perro deja de tirar la correa y los paseos vuelven a ser tranquilos.",
+    beneficios: [
+      "La argolla delantera hace que tu perro gire hacia ti cuando tira",
+      "No aprieta el cuello como el collar",
+      "Acolchado y ajustable en 4 puntos",
+    ],
+    // Ajusta los pesos a la tabla de tallas del proveedor.
+    tituloOpciones: "Talla",
+    opciones: ["S (hasta 8 kg)", "M (8 a 18 kg)", "L (18 a 30 kg)", "XL (más de 30 kg)"],
+    costo: 9000,
+    buscar: "arnés antitirones perro argolla delantera",
     linkPago: "",
   },
   {
@@ -129,6 +156,24 @@ const PRODUCTOS = [
     linkPago: "",
   },
   {
+    id: "juguete-premios",
+    categoria: "juego",
+    nombre: "Pelota que suelta premios",
+    precio: 14990,
+    emoji: "🎾",
+    imagen: "",
+    etiqueta: "Nuevo",
+    descripcion: "La llenas de premios o de su comida y tu perro juega hasta sacarlos. Así no se aburre ni rompe cosas.",
+    beneficios: [
+      "Rueda de forma impredecible y suelta premios de a poco",
+      "La dificultad es regulable",
+      "Sin pilas ni carga",
+    ],
+    costo: 7000,
+    buscar: "pelota dispensadora premios perro",
+    linkPago: "",
+  },
+  {
     id: "plato-lento",
     categoria: "cuidado",
     nombre: "Plato de comida lenta",
@@ -180,6 +225,21 @@ const PRODUCTOS = [
     ],
     costo: 10000,
     buscar: "dispensador bolsas perro correa + botella agua perro",
+    linkPago: "",
+  },
+  {
+    id: "rollos-bolsas",
+    complemento: true,
+    categoria: "paseo",
+    nombre: "8 rollos de bolsas para paseo",
+    precio: 3990,
+    emoji: "🛍️",
+    imagen: "",
+    etiqueta: "",
+    descripcion: "Repuesto de bolsas para recoger en el paseo.",
+    beneficios: [],
+    costo: 1500,
+    buscar: "rollos bolsas perro repuesto",
     linkPago: "",
   },
 ];

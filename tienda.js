@@ -25,6 +25,17 @@ function productoPorId(id) {
   return PRODUCTOS.find((p) => p.id === id);
 }
 
+// Las claves del carrito son "id" o "id::opción" (por ejemplo, la talla de un arnés).
+function leerClave(clave) {
+  const [id, opcion] = clave.split("::");
+  const p = productoPorId(id);
+  return { p, opcion, nombre: p && opcion ? `${p.nombre}, ${p.tituloOpciones.toLowerCase()} ${opcion}` : p?.nombre };
+}
+
+function hayProductoPrincipal() {
+  return Object.keys(carrito).some((clave) => !leerClave(clave).p?.complemento);
+}
+
 function linkWhatsApp(mensaje) {
   return `https://wa.me/${TIENDA.whatsapp}?text=${encodeURIComponent(mensaje)}`;
 }
@@ -37,7 +48,10 @@ function htmlFoto(p) {
   return `<div class="foto">${foto}${etiqueta}</div>`;
 }
 
-function htmlBotones(p) {
+function htmlBotones(p, enDetalle = false) {
+  if (p.opciones && !enDetalle) {
+    return `<button class="boton-principal" data-detalle="${p.id}">Elegir ${p.tituloOpciones.toLowerCase()}</button>`;
+  }
   const comprar = p.linkPago
     ? `<a class="boton-principal" href="${p.linkPago}" target="_blank" rel="noopener">Comprar ahora</a>`
     : "";
@@ -47,7 +61,7 @@ function htmlBotones(p) {
 
 function pintarFiltros() {
   const nav = document.getElementById("filtros");
-  const usadas = new Set(PRODUCTOS.map((p) => p.categoria));
+  const usadas = new Set(PRODUCTOS.filter((p) => !p.complemento).map((p) => p.categoria));
   nav.innerHTML = CATEGORIAS.filter((c) => c.id === "todos" || usadas.has(c.id))
     .map(
       (c) =>
@@ -59,7 +73,7 @@ function pintarFiltros() {
 function pintarCatalogo() {
   const catalogo = document.getElementById("catalogo");
   const visibles = PRODUCTOS.filter(
-    (p) => categoriaActiva === "todos" || p.categoria === categoriaActiva
+    (p) => !p.complemento && (categoriaActiva === "todos" || p.categoria === categoriaActiva)
   );
   catalogo.innerHTML = visibles
     .map(
@@ -85,19 +99,32 @@ function abrirDetalle(id) {
     <p class="precio">${formatoPrecio(p.precio)} <small>envío incluido</small></p>
     <p>${p.descripcion}</p>
     <ul class="beneficios">${p.beneficios.map((b) => `<li>${b}</li>`).join("")}</ul>
-    ${htmlBotones(p)}
+    ${htmlOpciones(p)}
+    ${htmlBotones(p, true)}
     <a class="enlace-pregunta" target="_blank" rel="noopener"
        href="${linkWhatsApp(`Hola, tengo una pregunta sobre: ${p.nombre}`)}">¿Dudas? Pregúntanos por WhatsApp</a>
   `;
   document.getElementById("detalle").showModal();
 }
 
-function agregar(id) {
-  carrito[id] = (carrito[id] || 0) + 1;
+function htmlOpciones(p) {
+  if (!p.opciones) return "";
+  return `
+    <label class="opciones">${p.tituloOpciones}
+      <select id="opcion-detalle">${p.opciones.map((o) => `<option>${o}</option>`).join("")}</select>
+    </label>`;
+}
+
+function agregar(id, desdeCarrito = false) {
+  const p = productoPorId(id);
+  const clave = p.opciones ? `${id}::${document.getElementById("opcion-detalle").value}` : id;
+  carrito[clave] = (carrito[clave] || 0) + 1;
   guardarCarrito();
   pintarCarrito();
-  document.getElementById("detalle").close();
-  abrirCarrito();
+  if (!desdeCarrito) {
+    document.getElementById("detalle").close();
+    abrirCarrito();
+  }
 }
 
 function pintarCarrito() {
@@ -107,7 +134,7 @@ function pintarCarrito() {
   let unidades = 0;
 
   for (const [id, cantidad] of Object.entries(carrito)) {
-    const p = productoPorId(id);
+    const { p, nombre } = leerClave(id);
     if (!p) {
       delete carrito[id];
       continue;
@@ -116,7 +143,7 @@ function pintarCarrito() {
     unidades += cantidad;
     const li = document.createElement("li");
     li.innerHTML = `
-      <span>${p.nombre}</span>
+      <span>${nombre}</span>
       <span class="cantidad">
         <button data-accion="menos" data-id="${id}" aria-label="Quitar uno">−</button>
         ${cantidad}
@@ -132,6 +159,29 @@ function pintarCarrito() {
   }
   document.getElementById("total").textContent = formatoPrecio(total);
   document.getElementById("contador").textContent = unidades;
+  pintarSugerencias();
+}
+
+// "Llévate también": productos baratos que se suman con un toque cuando ya hay algo en el carrito.
+function pintarSugerencias() {
+  const caja = document.getElementById("sugerencias");
+  const enCarrito = new Set(Object.keys(carrito).map((clave) => clave.split("::")[0]));
+  const sugeridos = hayProductoPrincipal()
+    ? TIENDA.sugerenciasCarrito.map(productoPorId).filter((p) => p && !p.opciones && !enCarrito.has(p.id))
+    : [];
+  caja.hidden = sugeridos.length === 0;
+  caja.innerHTML = `
+    <h3>Llévate también</h3>
+    ${sugeridos
+      .map(
+        (p) => `
+        <div class="sugerencia">
+          <span class="emoji" aria-hidden="true">${p.emoji}</span>
+          <span>${p.nombre}<br><strong>${formatoPrecio(p.precio)}</strong></span>
+          <button data-agregar="${p.id}" aria-label="Agregar ${p.nombre}">+ Agregar</button>
+        </div>`
+      )
+      .join("")}`;
 }
 
 function abrirCarrito() {
@@ -151,12 +201,16 @@ function enviarPedido(e) {
     alert("Agrega al menos un producto.");
     return;
   }
+  if (!hayProductoPrincipal()) {
+    alert("Los complementos se envían junto a otro producto. Agrega un producto de la tienda.");
+    return;
+  }
   const datos = new FormData(e.target);
   let total = 0;
-  const lineas = items.map(([id, cantidad]) => {
-    const p = productoPorId(id);
+  const lineas = items.map(([clave, cantidad]) => {
+    const { p, nombre } = leerClave(clave);
     total += p.precio * cantidad;
-    return `• ${cantidad} x ${p.nombre} — ${formatoPrecio(p.precio * cantidad)}`;
+    return `• ${cantidad} x ${nombre} — ${formatoPrecio(p.precio * cantidad)}`;
   });
   const mensaje = [
     `Hola ${TIENDA.nombre}, quiero hacer este pedido:`,
@@ -219,7 +273,11 @@ document.addEventListener("click", (e) => {
   const detalle = e.target.closest("[data-detalle]");
   if (detalle) abrirDetalle(detalle.dataset.detalle);
   const agregarBtn = e.target.closest("[data-agregar]");
-  if (agregarBtn) agregar(agregarBtn.dataset.agregar);
+  if (agregarBtn) {
+    // Desde las sugerencias del carrito se agrega sin cerrar ni reabrir nada.
+    const desdeCarrito = agregarBtn.closest("#sugerencias");
+    agregar(agregarBtn.dataset.agregar, desdeCarrito);
+  }
   if (e.target.closest("[data-cerrar]")) document.getElementById("detalle").close();
 });
 

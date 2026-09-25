@@ -42,6 +42,10 @@ Eso significa despacho de **24 a 72 horas** por Chilexpress, Starken o Blue Expr
 5. Si un producto no está en Dropi, búscalo en AliExpress (despacho lento: cambia `plazoEntrega`)
    o reemplázalo por otro del catálogo de Dropi del mismo nicho.
 
+**Complementos del carrito ("Llévate también"):** los rollos de bolsas cuestan $3.990 porque viajan
+en el mismo paquete que otro producto. Compra los complementos al **mismo proveedor** que tus
+productos principales. Si no, cada uno genera un envío aparte y pierdes plata.
+
 **Fórmula de precio:**
 ```
 precio de venta ≥ (precio proveedor + envío) × 1,6   → y redondea a ...990
@@ -71,6 +75,8 @@ proveedor (Dropi y AliExpress los incluyen) con tu voz o texto en pantalla.
 
 | Producto | Gancho (primeros 2 segundos) | Qué mostrar |
 |---|---|---|
+| Arnés antitirones | "Así paseaba a mi perro… y así lo paseo ahora" | Antes: perro tirando con collar. Después: con el arnés camina a tu lado |
+| Pelota que suelta premios | "Mi perro rompía todo cuando me iba" | Llenar la pelota con su comida → perro jugando concentrado varios minutos |
 | Rodillo quita pelos | "Mi sillón después de 1 día con mi perro…" | Sillón lleno de pelos → 5 pasadas → abre el depósito lleno de pelo |
 | Cepillo autolimpiante | "La muda de primavera llegó 😩" | Cepillar → apretar el botón → sale una bola enorme de pelo |
 | Botella de paseo | "Deja de llevar un plato para el agua" | En la plaza: aprieta, toma agua, suelta y el agua vuelve |
@@ -84,7 +90,7 @@ proveedor (Dropi y AliExpress los incluyen) con tu voz o texto en pantalla.
 > #perroschile #gatoschile #mascotaschile #santiago #tipsperros
 
 **Semana a semana:**
-- **Semana 1 (hasta el 4 de octubre):** crea las cuentas, publica 2 videos diarios de rodillo, cepillo y botella (los más fáciles de mostrar).
+- **Semana 1 (hasta el 4 de octubre):** crea las cuentas y publica 2 videos diarios del arnés antitirones, el rodillo y la botella. El arnés es el más viral del nicho: los videos de "antes y después" del paseo suman más de 500 millones de vistas.
 - **Semana 2 (Cyber Monday, 5 al 7 de octubre):** anuncia "Envío gratis + regalo (1 rollo de bolsas) por Cyber". Solo ofrece lo que realmente das.
 - **Semanas 3 y 4:** mira qué video tuvo más vistas y haz 5 versiones más de ese producto. Deja de publicar los que no funcionan.
 - **Noviembre y diciembre:** Black Friday y "Regalos de Navidad para tu mascota".
