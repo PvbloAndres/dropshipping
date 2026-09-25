@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tienda</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header class="barra">
+    <div>
+      <h1 id="nombre-tienda"></h1>
+      <p id="eslogan"></p>
+    </div>
+    <button id="abrir-carrito" class="boton-carrito" aria-label="Abrir carrito">
+      Carrito (<span id="contador">0</span>)
+    </button>
+  </header>
+
+  <main>
+    <section id="catalogo" class="catalogo"></section>
+  </main>
+
+  <aside id="carrito" class="carrito" aria-hidden="true">
+    <div class="carrito-cabecera">
+      <h2>Tu pedido</h2>
+      <button id="cerrar-carrito" aria-label="Cerrar carrito">✕</button>
+    </div>
+    <ul id="lista-carrito"></ul>
+    <p class="total">Total: <strong id="total"></strong></p>
+    <form id="form-pedido">
+      <input name="nombre" placeholder="Tu nombre" required>
+      <input name="ciudad" placeholder="Ciudad / código postal" required>
+      <button type="submit" class="boton-principal">Pedir por WhatsApp</button>
+    </form>
+    <p id="nota-envio" class="nota"></p>
+  </aside>
+
+  <footer class="pie">
+    <p>© <span id="anio"></span> <span id="nombre-pie"></span></p>
+  </footer>
+
+  <script src="productos.js"></script>
+  <script src="tienda.js"></script>
+</body>
+</html>

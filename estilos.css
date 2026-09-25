@@ -1,0 +1,165 @@
+:root {
+  --fondo: #f7f7f5;
+  --superficie: #ffffff;
+  --texto: #1d1d1f;
+  --suave: #6b6b70;
+  --acento: #1a7f5a;
+  --acento-texto: #ffffff;
+  --borde: #e3e3e0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #141416;
+    --superficie: #1f1f22;
+    --texto: #f2f2f2;
+    --suave: #a0a0a6;
+    --acento: #2fb07f;
+    --acento-texto: #0b0b0c;
+    --borde: #2e2e32;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+}
+
+.barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--superficie);
+  border-bottom: 1px solid var(--borde);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.barra h1 { margin: 0; font-size: 1.4rem; }
+.barra p { margin: 0.2rem 0 0; color: var(--suave); font-size: 0.9rem; }
+
+button { font: inherit; cursor: pointer; }
+
+.boton-carrito {
+  background: none;
+  border: 1px solid var(--borde);
+  color: var(--texto);
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.boton-principal {
+  width: 100%;
+  background: var(--acento);
+  color: var(--acento-texto);
+  border: none;
+  padding: 0.7rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.catalogo {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.tarjeta {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.tarjeta img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.tarjeta h3 { font-size: 1rem; margin: 0.7rem 0 0.3rem; }
+.descripcion { color: var(--suave); font-size: 0.9rem; margin: 0 0 0.5rem; flex: 1; }
+.precio { font-weight: 700; font-size: 1.1rem; margin: 0 0 0.7rem; }
+
+.carrito {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(380px, 100%);
+  background: var(--superficie);
+  border-left: 1px solid var(--borde);
+  padding: 1rem;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  z-index: 10;
+}
+
+.carrito[aria-hidden="false"] { transform: translateX(0); }
+
+.carrito-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carrito-cabecera button {
+  background: none;
+  border: none;
+  color: var(--texto);
+  font-size: 1.2rem;
+}
+
+#lista-carrito { list-style: none; padding: 0; margin: 1rem 0; }
+
+#lista-carrito li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--borde);
+  font-size: 0.9rem;
+}
+
+#lista-carrito li.vacio { display: block; color: var(--suave); border: none; }
+
+.cantidad button {
+  background: none;
+  border: 1px solid var(--borde);
+  color: var(--texto);
+  border-radius: 4px;
+  width: 1.6rem;
+}
+
+.total { font-size: 1.1rem; }
+
+#form-pedido { display: grid; gap: 0.6rem; }
+
+#form-pedido input {
+  padding: 0.6rem;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--fondo);
+  color: var(--texto);
+  font: inherit;
+}
+
+.nota { color: var(--suave); font-size: 0.85rem; }
+
+.pie { text-align: center; color: var(--suave); padding: 2rem 1rem; font-size: 0.85rem; }
