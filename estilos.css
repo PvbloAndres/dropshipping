@@ -1,22 +1,25 @@
 :root {
-  --fondo: #f7f7f5;
+  --fondo: #fbf8f3;
   --superficie: #ffffff;
-  --texto: #1d1d1f;
-  --suave: #6b6b70;
-  --acento: #1a7f5a;
+  --texto: #2a2320;
+  --suave: #6f6560;
+  --acento: #e0612f;
   --acento-texto: #ffffff;
-  --borde: #e3e3e0;
+  --acento-suave: #fde9df;
+  --borde: #ece5dc;
+  --whatsapp: #25d366;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --fondo: #141416;
-    --superficie: #1f1f22;
-    --texto: #f2f2f2;
-    --suave: #a0a0a6;
-    --acento: #2fb07f;
-    --acento-texto: #0b0b0c;
-    --borde: #2e2e32;
+    --fondo: #1a1715;
+    --superficie: #24201d;
+    --texto: #f4efe9;
+    --suave: #b3a9a1;
+    --acento: #ff8a5b;
+    --acento-texto: #1a1715;
+    --acento-suave: #3a2a22;
+    --borde: #3a332e;
   }
 }
 
@@ -27,14 +30,18 @@ body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   background: var(--fondo);
   color: var(--texto);
+  line-height: 1.5;
 }
 
+button { font: inherit; cursor: pointer; color: inherit; }
+a { color: var(--acento); }
+
+/* ---------- Barra superior ---------- */
 .barra {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+  padding: 0.8rem 1rem;
   background: var(--superficie);
   border-bottom: 1px solid var(--borde);
   position: sticky;
@@ -42,44 +49,103 @@ body {
   z-index: 5;
 }
 
-.barra h1 { margin: 0; font-size: 1.4rem; }
-.barra p { margin: 0.2rem 0 0; color: var(--suave); font-size: 0.9rem; }
-
-button { font: inherit; cursor: pointer; }
+.marca {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--texto);
+  text-decoration: none;
+}
 
 .boton-carrito {
+  background: var(--acento-suave);
+  border: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+/* ---------- Botones ---------- */
+.boton-principal,
+.boton-secundario {
+  display: block;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  padding: 0.75rem;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.boton-principal {
+  background: var(--acento);
+  color: var(--acento-texto);
+  border: none;
+}
+
+.boton-secundario {
   background: none;
   border: 1px solid var(--borde);
-  color: var(--texto);
-  padding: 0.5rem 0.9rem;
+}
+
+a.boton-principal + .boton-secundario { margin-top: 0.5rem; }
+
+/* ---------- Portada ---------- */
+.portada {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem 1.5rem;
+  text-align: center;
+}
+
+.portada h1 {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  line-height: 1.15;
+  margin: 0 0 0.6rem;
+}
+
+.portada p { color: var(--suave); margin: 0 0 1.2rem; }
+.boton-portada { display: inline-block; width: auto; padding: 0.75rem 1.6rem; }
+
+.confianza {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+.confianza li {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+/* ---------- Catálogo ---------- */
+.filtros {
+  max-width: 1100px;
+  margin: 1.5rem auto 0;
+  padding: 0 1rem;
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+}
+
+.filtros button {
+  border: 1px solid var(--borde);
+  background: var(--superficie);
+  padding: 0.4rem 0.9rem;
   border-radius: 999px;
   white-space: nowrap;
 }
 
-.boton-principal {
-  width: 100%;
-  background: var(--acento);
-  color: var(--acento-texto);
-  border: none;
-  padding: 0.7rem;
-  border-radius: 8px;
-  font-weight: 600;
-}
-
-a.boton-principal {
-  display: block;
-  text-align: center;
-  text-decoration: none;
-  margin-bottom: 0.5rem;
-}
-
-.boton-secundario {
-  width: 100%;
-  background: none;
-  color: var(--texto);
-  border: 1px solid var(--borde);
-  padding: 0.7rem;
-  border-radius: 8px;
+.filtros button[aria-pressed="true"] {
+  background: var(--texto);
+  color: var(--fondo);
+  border-color: var(--texto);
 }
 
 .catalogo {
@@ -94,52 +160,123 @@ a.boton-principal {
 .tarjeta {
   background: var(--superficie);
   border: 1px solid var(--borde);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 0.8rem;
   display: flex;
   flex-direction: column;
 }
 
-.tarjeta img {
-  width: 100%;
+.abrir-detalle {
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+}
+
+.foto {
+  position: relative;
   aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--acento-suave);
+  display: grid;
+  place-items: center;
+}
+
+.foto img { width: 100%; height: 100%; object-fit: cover; }
+.foto .emoji { font-size: 5rem; }
+
+.etiqueta {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background: var(--texto);
+  color: var(--fondo);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
 }
 
 .tarjeta h3 { font-size: 1rem; margin: 0.7rem 0 0.3rem; }
 .descripcion { color: var(--suave); font-size: 0.9rem; margin: 0 0 0.5rem; flex: 1; }
-.precio { font-weight: 700; font-size: 1.1rem; margin: 0 0 0.7rem; }
+.precio { font-weight: 800; font-size: 1.2rem; margin: 0 0 0.7rem; }
+.precio small { font-weight: 400; font-size: 0.8rem; color: var(--suave); }
+
+/* ---------- Detalle de producto ---------- */
+.detalle {
+  width: min(460px, calc(100% - 2rem));
+  max-height: calc(100% - 2rem);
+  border: none;
+  border-radius: 16px;
+  padding: 1rem;
+  background: var(--superficie);
+  color: var(--texto);
+}
+
+.detalle::backdrop { background: rgb(0 0 0 / 0.5); }
+.detalle h2 { margin: 0.8rem 0 0.2rem; font-size: 1.25rem; }
+.detalle .foto .emoji { font-size: 7rem; }
+
+.cerrar {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 1;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  width: 2rem;
+  height: 2rem;
+}
+
+.beneficios { padding-left: 1.2rem; margin: 0 0 1rem; }
+.beneficios li { margin-bottom: 0.3rem; }
+.enlace-pregunta { display: block; text-align: center; margin-top: 0.8rem; font-size: 0.9rem; }
+
+/* ---------- Preguntas frecuentes ---------- */
+.preguntas { max-width: 720px; margin: 1.5rem auto; padding: 0 1rem; }
+.preguntas h2 { text-align: center; }
+
+.preguntas details {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.preguntas summary { font-weight: 700; cursor: pointer; }
+.preguntas details p { margin: 0.6rem 0 0; color: var(--suave); }
+
+/* ---------- Carrito ---------- */
+.fondo {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 0.4);
+  z-index: 9;
+}
 
 .carrito {
   position: fixed;
   top: 0;
   right: 0;
   height: 100%;
-  width: min(380px, 100%);
+  width: min(400px, 100%);
   background: var(--superficie);
   border-left: 1px solid var(--borde);
   padding: 1rem;
   overflow-y: auto;
   transform: translateX(100%);
-  transition: transform 0.2s ease;
+  visibility: hidden;
+  transition: transform 0.2s ease, visibility 0.2s;
   z-index: 10;
 }
 
-.carrito[aria-hidden="false"] { transform: translateX(0); }
+.carrito[aria-hidden="false"] { transform: translateX(0); visibility: visible; }
 
-.carrito-cabecera {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.carrito-cabecera button {
-  background: none;
-  border: none;
-  color: var(--texto);
-  font-size: 1.2rem;
-}
+.carrito-cabecera { display: flex; justify-content: space-between; align-items: center; }
+.carrito-cabecera button { background: none; border: none; font-size: 1.2rem; }
 
 #lista-carrito { list-style: none; padding: 0; margin: 1rem 0; }
 
@@ -155,20 +292,23 @@ a.boton-principal {
 
 #lista-carrito li.vacio { display: block; color: var(--suave); border: none; }
 
+.cantidad { white-space: nowrap; }
+
 .cantidad button {
   background: none;
   border: 1px solid var(--borde);
-  color: var(--texto);
   border-radius: 4px;
   width: 1.6rem;
 }
 
 .total { font-size: 1.1rem; }
+.total small { color: var(--suave); font-size: 0.8rem; }
 
 #form-pedido { display: grid; gap: 0.6rem; }
 
-#form-pedido input {
-  padding: 0.6rem;
+#form-pedido input,
+#form-pedido select {
+  padding: 0.65rem;
   border: 1px solid var(--borde);
   border-radius: 8px;
   background: var(--fondo);
@@ -178,4 +318,36 @@ a.boton-principal {
 
 .nota { color: var(--suave); font-size: 0.85rem; }
 
-.pie { text-align: center; color: var(--suave); padding: 2rem 1rem; font-size: 0.85rem; }
+/* ---------- WhatsApp flotante y pie ---------- */
+.whatsapp-flotante {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  background: var(--whatsapp);
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.25);
+  z-index: 4;
+}
+
+.pie { text-align: center; color: var(--suave); padding: 1.5rem 1rem 5rem; font-size: 0.85rem; }
+
+/* ---------- Celulares: 2 productos por fila ---------- */
+@media (max-width: 560px) {
+  .catalogo { grid-template-columns: 1fr 1fr; gap: 0.6rem; padding: 0.8rem; }
+  .tarjeta { padding: 0.55rem; }
+  .tarjeta h3 { font-size: 0.9rem; }
+  .tarjeta .descripcion { display: none; }
+  .tarjeta .precio { font-size: 1.05rem; margin-top: auto; }
+  .tarjeta .abrir-detalle { flex: 1; }
+  .foto .emoji { font-size: 3.5rem; }
+  .tarjeta .etiqueta { font-size: 0.65rem; top: 0.35rem; left: 0.35rem; }
+  .boton-principal, .boton-secundario { padding: 0.6rem 0.4rem; font-size: 0.85rem; }
+  .confianza { grid-template-columns: 1fr 1fr; }
+  .confianza li { font-size: 0.8rem; }
+}

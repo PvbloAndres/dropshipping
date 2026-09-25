@@ -1,4 +1,5 @@
 const carrito = cargarCarrito();
+let categoriaActiva = "todos";
 
 function cargarCarrito() {
   try {
@@ -17,37 +18,86 @@ function guardarCarrito() {
 }
 
 function formatoPrecio(valor) {
-  return `${TIENDA.simboloMoneda}${valor.toLocaleString("es-CL")} ${TIENDA.moneda}`;
+  return `${TIENDA.simboloMoneda}${valor.toLocaleString("es-CL")}`;
 }
 
 function productoPorId(id) {
   return PRODUCTOS.find((p) => p.id === id);
 }
 
+function linkWhatsApp(mensaje) {
+  return `https://wa.me/${TIENDA.whatsapp}?text=${encodeURIComponent(mensaje)}`;
+}
+
+function htmlFoto(p) {
+  const foto = p.imagen
+    ? `<img src="${p.imagen}" alt="${p.nombre}" loading="lazy">`
+    : `<span class="emoji" aria-hidden="true">${p.emoji}</span>`;
+  const etiqueta = p.etiqueta ? `<span class="etiqueta">${p.etiqueta}</span>` : "";
+  return `<div class="foto">${foto}${etiqueta}</div>`;
+}
+
+function htmlBotones(p) {
+  const comprar = p.linkPago
+    ? `<a class="boton-principal" href="${p.linkPago}" target="_blank" rel="noopener">Comprar ahora</a>`
+    : "";
+  const clase = p.linkPago ? "boton-secundario" : "boton-principal";
+  return `${comprar}<button class="${clase}" data-agregar="${p.id}">Agregar al carrito</button>`;
+}
+
+function pintarFiltros() {
+  const nav = document.getElementById("filtros");
+  const usadas = new Set(PRODUCTOS.map((p) => p.categoria));
+  nav.innerHTML = CATEGORIAS.filter((c) => c.id === "todos" || usadas.has(c.id))
+    .map(
+      (c) =>
+        `<button data-categoria="${c.id}" aria-pressed="${c.id === categoriaActiva}">${c.nombre}</button>`
+    )
+    .join("");
+}
+
 function pintarCatalogo() {
   const catalogo = document.getElementById("catalogo");
-  catalogo.innerHTML = "";
-  for (const p of PRODUCTOS) {
-    const tarjeta = document.createElement("article");
-    tarjeta.className = "tarjeta";
-    tarjeta.innerHTML = `
-      <img src="${p.imagen}" alt="${p.nombre}" loading="lazy">
-      <h3>${p.nombre}</h3>
-      <p class="descripcion">${p.descripcion}</p>
-      <p class="precio">${formatoPrecio(p.precio)}</p>
-      ${p.linkPago ? `<a class="boton-principal" href="${p.linkPago}" target="_blank" rel="noopener">Comprar ahora</a>` : ""}
-      <button class="${p.linkPago ? "boton-secundario" : "boton-principal"}" data-id="${p.id}">Agregar al carrito</button>
-    `;
-    catalogo.appendChild(tarjeta);
-  }
-  catalogo.addEventListener("click", (e) => {
-    const id = e.target.dataset.id;
-    if (!id) return;
-    carrito[id] = (carrito[id] || 0) + 1;
-    guardarCarrito();
-    pintarCarrito();
-    abrirCarrito();
-  });
+  const visibles = PRODUCTOS.filter(
+    (p) => categoriaActiva === "todos" || p.categoria === categoriaActiva
+  );
+  catalogo.innerHTML = visibles
+    .map(
+      (p) => `
+      <article class="tarjeta">
+        <button class="abrir-detalle" data-detalle="${p.id}" aria-label="Ver ${p.nombre}">
+          ${htmlFoto(p)}
+          <h3>${p.nombre}</h3>
+        </button>
+        <p class="descripcion">${p.descripcion}</p>
+        <p class="precio">${formatoPrecio(p.precio)}</p>
+        ${htmlBotones(p)}
+      </article>`
+    )
+    .join("");
+}
+
+function abrirDetalle(id) {
+  const p = productoPorId(id);
+  document.getElementById("detalle-contenido").innerHTML = `
+    ${htmlFoto(p)}
+    <h2>${p.nombre}</h2>
+    <p class="precio">${formatoPrecio(p.precio)} <small>envío incluido</small></p>
+    <p>${p.descripcion}</p>
+    <ul class="beneficios">${p.beneficios.map((b) => `<li>${b}</li>`).join("")}</ul>
+    ${htmlBotones(p)}
+    <a class="enlace-pregunta" target="_blank" rel="noopener"
+       href="${linkWhatsApp(`Hola, tengo una pregunta sobre: ${p.nombre}`)}">¿Dudas? Pregúntanos por WhatsApp</a>
+  `;
+  document.getElementById("detalle").showModal();
+}
+
+function agregar(id) {
+  carrito[id] = (carrito[id] || 0) + 1;
+  guardarCarrito();
+  pintarCarrito();
+  document.getElementById("detalle").close();
+  abrirCarrito();
 }
 
 function pintarCarrito() {
@@ -86,10 +136,12 @@ function pintarCarrito() {
 
 function abrirCarrito() {
   document.getElementById("carrito").setAttribute("aria-hidden", "false");
+  document.getElementById("fondo").hidden = false;
 }
 
 function cerrarCarrito() {
   document.getElementById("carrito").setAttribute("aria-hidden", "true");
+  document.getElementById("fondo").hidden = true;
 }
 
 function enviarPedido(e) {
@@ -107,25 +159,78 @@ function enviarPedido(e) {
     return `• ${cantidad} x ${p.nombre} — ${formatoPrecio(p.precio * cantidad)}`;
   });
   const mensaje = [
-    `Hola, quiero hacer este pedido en ${TIENDA.nombre}:`,
+    `Hola ${TIENDA.nombre}, quiero hacer este pedido:`,
     ...lineas,
-    `Total: ${formatoPrecio(total)}`,
+    `Total: ${formatoPrecio(total)} (envío incluido)`,
     "",
     `Nombre: ${datos.get("nombre")}`,
     `Dirección: ${datos.get("direccion")}, ${datos.get("comuna")}`,
+    `Pago: ${datos.get("pago")}`,
   ].join("\n");
-  window.open(`https://wa.me/${TIENDA.whatsapp}?text=${encodeURIComponent(mensaje)}`, "_blank");
+  window.open(linkWhatsApp(mensaje), "_blank");
 }
 
-document.title = TIENDA.nombre;
-document.getElementById("nombre-tienda").textContent = TIENDA.nombre;
-document.getElementById("nombre-pie").textContent = TIENDA.nombre;
-document.getElementById("eslogan").textContent = TIENDA.eslogan;
-document.getElementById("nota-envio").textContent = TIENDA.notaEnvio;
-document.getElementById("anio").textContent = new Date().getFullYear();
+function listaConO(items) {
+  return items.length > 1 ? `${items.slice(0, -1).join(", ")} o ${items.at(-1)}` : items[0];
+}
+
+function minusculaInicial(texto) {
+  // "Transferencia bancaria" → "transferencia bancaria", pero respeta nombres propios como "Mercado Pago".
+  return texto.startsWith("Mercado") ? texto : texto[0].toLowerCase() + texto.slice(1);
+}
+
+function pintarTextos() {
+  document.title = `${TIENDA.nombre} | Accesorios para mascotas`;
+  document.getElementById("nombre-tienda").textContent = TIENDA.nombre;
+  document.getElementById("nombre-pie").textContent = TIENDA.nombre;
+  document.getElementById("eslogan").textContent = TIENDA.eslogan;
+  document.getElementById("anio").textContent = new Date().getFullYear();
+  document.querySelectorAll(".plazo").forEach((el) => (el.textContent = TIENDA.plazoEntrega));
+
+  const cortos = TIENDA.metodosPago.map((m) => m.replace(/ \(.*\)/, ""));
+  document.getElementById("confianza-pagos").textContent = listaConO(cortos);
+  document.getElementById("texto-pagos").textContent =
+    `Puedes pagar con ${listaConO(TIENDA.metodosPago.map(minusculaInicial))}. ` +
+    "Al confirmar tu pedido por WhatsApp te enviamos los datos.";
+  document.getElementById("metodo-pago").innerHTML =
+    '<option value="">¿Cómo quieres pagar?</option>' +
+    TIENDA.metodosPago.map((m) => `<option>${m}</option>`).join("");
+
+  document.getElementById("whatsapp-flotante").href = linkWhatsApp(
+    `Hola ${TIENDA.nombre}, tengo una consulta`
+  );
+
+  const redes = [
+    TIENDA.instagram && `<a href="https://instagram.com/${TIENDA.instagram}" target="_blank" rel="noopener">Instagram</a>`,
+    TIENDA.tiktok && `<a href="https://tiktok.com/@${TIENDA.tiktok}" target="_blank" rel="noopener">TikTok</a>`,
+  ].filter(Boolean);
+  document.getElementById("redes").innerHTML = redes.join(" · ");
+}
+
+document.getElementById("filtros").addEventListener("click", (e) => {
+  const categoria = e.target.dataset.categoria;
+  if (!categoria) return;
+  categoriaActiva = categoria;
+  pintarFiltros();
+  pintarCatalogo();
+});
+
+document.addEventListener("click", (e) => {
+  const detalle = e.target.closest("[data-detalle]");
+  if (detalle) abrirDetalle(detalle.dataset.detalle);
+  const agregarBtn = e.target.closest("[data-agregar]");
+  if (agregarBtn) agregar(agregarBtn.dataset.agregar);
+  if (e.target.closest("[data-cerrar]")) document.getElementById("detalle").close();
+});
+
+document.getElementById("detalle").addEventListener("click", (e) => {
+  // Cerrar al tocar fuera del recuadro
+  if (e.target.id === "detalle") e.target.close();
+});
 
 document.getElementById("abrir-carrito").addEventListener("click", abrirCarrito);
 document.getElementById("cerrar-carrito").addEventListener("click", cerrarCarrito);
+document.getElementById("fondo").addEventListener("click", cerrarCarrito);
 document.getElementById("form-pedido").addEventListener("submit", enviarPedido);
 document.getElementById("lista-carrito").addEventListener("click", (e) => {
   const { accion, id } = e.target.dataset;
@@ -136,5 +241,7 @@ document.getElementById("lista-carrito").addEventListener("click", (e) => {
   pintarCarrito();
 });
 
+pintarTextos();
+pintarFiltros();
 pintarCatalogo();
 pintarCarrito();
