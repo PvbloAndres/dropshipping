@@ -6,7 +6,7 @@ const TIENDA = {
   nombre: "Patas Contentas",
   eslogan: "Todo para el paseo, el verano y la casa de tu perro o gato",
   // Tu número de WhatsApp con código de país, solo dígitos (ej: 56912345678)
-  whatsapp: "56900000000",
+  whatsapp: "56935835960",
   // Tus redes (déjalas en "" si aún no las tienes)
   instagram: "",
   tiktok: "",
