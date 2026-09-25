@@ -17,6 +17,9 @@ const TIENDA = {
   plazoEntrega: "1 a 3 días hábiles",
   // Métodos que aceptas. "Pago contra entrega" solo si tu proveedor es Dropi.
   metodosPago: ["Transferencia bancaria", "Mercado Pago (tarjeta o débito)", "Pago contra entrega"],
+  // Cobro en línea: pega aquí la dirección de tu Worker de Cloudflare (README, "Cobrar en la web").
+  // Con esto el cliente paga en la web con Mercado Pago y "Mercado Pago" deja de pedirse por WhatsApp.
+  urlPagos: "",
   // "Llévate también": ids de productos baratos que se ofrecen dentro del carrito.
   sugerenciasCarrito: ["rollos-bolsas", "varita-gato"],
 };
@@ -43,6 +46,8 @@ const CATEGORIAS = [
 //   complemento → (opcional) true = no aparece en el catálogo, solo como "Llévate también" en el
 //                 carrito y siempre junto a otro producto. Su precio NO incluye envío, así que debe
 //                 ser del MISMO proveedor que tus productos principales para que viaje en el mismo paquete.
+// El cobro en línea lee id, nombre, precio, opciones y complemento de este archivo:
+// no les cambies el nombre a esos campos y deja "id" como el primer campo de cada producto.
 const PRODUCTOS = [
   {
     id: "botella-paseo",

@@ -84,12 +84,13 @@
     <p class="total">Total: <strong id="total"></strong> <small>(envío incluido)</small></p>
     <form id="form-pedido">
       <input name="nombre" placeholder="Nombre y apellido" autocomplete="name" required>
+      <input name="telefono" type="tel" placeholder="Teléfono / WhatsApp (+56 9…)" autocomplete="tel" required>
       <input name="direccion" placeholder="Dirección (calle, número, depto)" autocomplete="street-address" required>
       <input name="comuna" placeholder="Comuna y región" required>
       <select name="pago" id="metodo-pago" required></select>
-      <button type="submit" class="boton-principal">Confirmar pedido por WhatsApp</button>
+      <button type="submit" id="boton-pedido" class="boton-principal">Confirmar pedido por WhatsApp</button>
     </form>
-    <p class="nota">Te respondemos por WhatsApp para confirmar tu pedido y enviarte los datos de pago.</p>
+    <p id="nota-pedido" class="nota"></p>
   </aside>
 
   <script src="productos.js"></script>

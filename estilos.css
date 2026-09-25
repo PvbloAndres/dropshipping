@@ -231,6 +231,9 @@ a.boton-principal + .boton-secundario { margin-top: 0.5rem; }
 }
 
 .beneficios { padding-left: 1.2rem; margin: 0 0 1rem; }
+.resultado-pago { text-align: center; padding: 1rem 0.5rem 0.5rem; }
+.resultado-pago h2 { margin-top: 1rem; }
+.boton-principal:disabled { opacity: 0.6; cursor: wait; }
 .beneficios li { margin-bottom: 0.3rem; }
 .enlace-pregunta { display: block; text-align: center; margin-top: 0.8rem; font-size: 0.9rem; }
 
@@ -346,10 +349,12 @@ a.boton-principal + .boton-secundario { margin-top: 0.5rem; }
 .total { font-size: 1.1rem; }
 .total small { color: var(--suave); font-size: 0.8rem; }
 
-#form-pedido { display: grid; gap: 0.6rem; }
+#form-pedido { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.6rem; }
 
 #form-pedido input,
 #form-pedido select {
+  width: 100%;
+  min-width: 0;
   padding: 0.65rem;
   border: 1px solid var(--borde);
   border-radius: 8px;

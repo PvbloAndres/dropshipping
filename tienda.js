@@ -1,5 +1,13 @@
 const carrito = cargarCarrito();
 let categoriaActiva = "todos";
+const URL_PAGOS = (TIENDA.urlPagos || "").replace(/\/$/, "");
+const PAGO_EN_LINEA = "Pagar en línea (tarjeta, débito, transferencia)";
+
+// Con cobro en línea activo, Mercado Pago se paga en la web y no se ofrece por WhatsApp.
+function metodosDePago() {
+  if (!URL_PAGOS) return TIENDA.metodosPago;
+  return [PAGO_EN_LINEA, ...TIENDA.metodosPago.filter((m) => !m.startsWith("Mercado Pago"))];
+}
 
 function cargarCarrito() {
   try {
@@ -121,6 +129,7 @@ function agregar(id, desdeCarrito = false) {
   carrito[clave] = (carrito[clave] || 0) + 1;
   guardarCarrito();
   pintarCarrito();
+revisarRetornoPago();
   if (!desdeCarrito) {
     document.getElementById("detalle").close();
     abrirCarrito();
@@ -194,6 +203,73 @@ function cerrarCarrito() {
   document.getElementById("fondo").hidden = true;
 }
 
+function actualizarBotonPedido() {
+  const enLinea = document.getElementById("metodo-pago").value === PAGO_EN_LINEA;
+  document.getElementById("boton-pedido").textContent = enLinea
+    ? "Pagar ahora 🔒"
+    : "Confirmar pedido por WhatsApp";
+  document.getElementById("nota-pedido").textContent = enLinea
+    ? "Pagas seguro en Mercado Pago y luego vuelves a la tienda."
+    : "Te respondemos por WhatsApp para confirmar tu pedido y enviarte los datos de pago.";
+}
+
+async function pagarEnLinea(datos, boton) {
+  boton.disabled = true;
+  boton.textContent = "Conectando con Mercado Pago…";
+  try {
+    const respuesta = await fetch(`${URL_PAGOS}/pagar`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        items: Object.entries(carrito).map(([clave, cantidad]) => ({ clave, cantidad })),
+        cliente: {
+          nombre: datos.get("nombre"),
+          telefono: datos.get("telefono"),
+          direccion: datos.get("direccion"),
+          comuna: datos.get("comuna"),
+        },
+      }),
+    });
+    const resultado = await respuesta.json();
+    if (!respuesta.ok) throw new Error(resultado.error);
+    location.href = resultado.url;
+  } catch (error) {
+    alert(error.message || "No pudimos conectar con Mercado Pago. Intenta de nuevo.");
+    boton.disabled = false;
+    actualizarBotonPedido();
+  }
+}
+
+// Al volver de Mercado Pago la dirección trae ?pago=aprobado|pendiente|rechazado&pedido=CODIGO
+function revisarRetornoPago() {
+  const params = new URLSearchParams(location.search);
+  const estado = params.get("pago");
+  if (!estado) return;
+  const pedido = params.get("pedido") || "";
+  history.replaceState(null, "", location.pathname);
+
+  const mensajes = {
+    aprobado: ["¡Pago recibido! 🎉", `Tu pedido <strong>${pedido}</strong> está confirmado. Lo despachamos y te enviamos el número de seguimiento por WhatsApp.`],
+    pendiente: ["Pago pendiente ⏳", `Tu pedido <strong>${pedido}</strong> queda reservado. Apenas Mercado Pago confirme el pago lo despachamos.`],
+    rechazado: ["El pago no se completó", "No se hizo ningún cobro. Tu carrito sigue guardado para que lo intentes de nuevo."],
+  };
+  const [titulo, texto] = mensajes[estado] || mensajes.rechazado;
+  if (estado === "aprobado" || estado === "pendiente") {
+    for (const clave of Object.keys(carrito)) delete carrito[clave];
+    guardarCarrito();
+    pintarCarrito();
+revisarRetornoPago();
+  }
+  document.getElementById("detalle-contenido").innerHTML = `
+    <div class="resultado-pago">
+      <h2>${titulo}</h2>
+      <p>${texto}</p>
+      <a class="boton-principal" target="_blank" rel="noopener"
+         href="${linkWhatsApp(`Hola ${TIENDA.nombre}, te escribo por mi pedido ${pedido}`)}">Escríbenos por WhatsApp</a>
+    </div>`;
+  document.getElementById("detalle").showModal();
+}
+
 function enviarPedido(e) {
   e.preventDefault();
   const items = Object.entries(carrito);
@@ -206,6 +282,10 @@ function enviarPedido(e) {
     return;
   }
   const datos = new FormData(e.target);
+  if (datos.get("pago") === PAGO_EN_LINEA) {
+    pagarEnLinea(datos, document.getElementById("boton-pedido"));
+    return;
+  }
   let total = 0;
   const lineas = items.map(([clave, cantidad]) => {
     const { p, nombre } = leerClave(clave);
@@ -218,6 +298,7 @@ function enviarPedido(e) {
     `Total: ${formatoPrecio(total)} (envío incluido)`,
     "",
     `Nombre: ${datos.get("nombre")}`,
+    `Teléfono: ${datos.get("telefono")}`,
     `Dirección: ${datos.get("direccion")}, ${datos.get("comuna")}`,
     `Pago: ${datos.get("pago")}`,
   ].join("\n");
@@ -241,14 +322,19 @@ function pintarTextos() {
   document.getElementById("anio").textContent = new Date().getFullYear();
   document.querySelectorAll(".plazo").forEach((el) => (el.textContent = TIENDA.plazoEntrega));
 
-  const cortos = TIENDA.metodosPago.map((m) => m.replace(/ \(.*\)/, ""));
+  const metodos = metodosDePago();
+  const cortos = metodos.map((m) => (m === PAGO_EN_LINEA ? "Pago en línea con Mercado Pago" : m.replace(/ \(.*\)/, "")));
   document.getElementById("confianza-pagos").textContent = listaConO(cortos);
-  document.getElementById("texto-pagos").textContent =
-    `Puedes pagar con ${listaConO(TIENDA.metodosPago.map(minusculaInicial))}. ` +
-    "Al confirmar tu pedido por WhatsApp te enviamos los datos.";
+  const otros = metodos.filter((m) => m !== PAGO_EN_LINEA).map(minusculaInicial);
+  document.getElementById("texto-pagos").textContent = URL_PAGOS
+    ? "Puedes pagar en línea con Mercado Pago (tarjeta, débito o transferencia)" +
+      (otros.length ? `, o elegir ${listaConO(otros)} y coordinar por WhatsApp.` : ".")
+    : `Puedes pagar con ${listaConO(metodos.map(minusculaInicial))}. ` +
+      "Al confirmar tu pedido por WhatsApp te enviamos los datos.";
   document.getElementById("metodo-pago").innerHTML =
-    '<option value="">¿Cómo quieres pagar?</option>' +
-    TIENDA.metodosPago.map((m) => `<option>${m}</option>`).join("");
+    (URL_PAGOS ? "" : '<option value="">¿Cómo quieres pagar?</option>') +
+    metodos.map((m) => `<option>${m}</option>`).join("");
+  actualizarBotonPedido();
 
   document.getElementById("whatsapp-flotante").href = linkWhatsApp(
     `Hola ${TIENDA.nombre}, tengo una consulta`
@@ -290,6 +376,7 @@ document.getElementById("abrir-carrito").addEventListener("click", abrirCarrito)
 document.getElementById("cerrar-carrito").addEventListener("click", cerrarCarrito);
 document.getElementById("fondo").addEventListener("click", cerrarCarrito);
 document.getElementById("form-pedido").addEventListener("submit", enviarPedido);
+document.getElementById("metodo-pago").addEventListener("change", actualizarBotonPedido);
 document.getElementById("lista-carrito").addEventListener("click", (e) => {
   const { accion, id } = e.target.dataset;
   if (!accion) return;
@@ -297,9 +384,11 @@ document.getElementById("lista-carrito").addEventListener("click", (e) => {
   if (carrito[id] <= 0) delete carrito[id];
   guardarCarrito();
   pintarCarrito();
+revisarRetornoPago();
 });
 
 pintarTextos();
 pintarFiltros();
 pintarCatalogo();
 pintarCarrito();
+revisarRetornoPago();

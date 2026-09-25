@@ -97,7 +97,8 @@ proveedor (Dropi y AliExpress los incluyen) con tu voz o texto en pantalla.
 
 ## 4. Operación diaria (15 a 30 minutos)
 
-1. Llega un pedido por WhatsApp con el detalle del carrito.
+1. Llega un pedido: si el cliente pagó en la web, aparece como **✅ pagado** en tu página de pedidos
+   (README, "Tus pedidos") y te saltas el paso 2. Si eligió transferencia o contra entrega, te llega por WhatsApp.
 2. Respondes confirmando y envías los datos de pago (o confirmas la dirección si es contra entrega).
 3. Cuando el cliente paga, creas el pedido en Dropi con su nombre y dirección.
 4. Cuando Dropi te da el número de seguimiento, se lo mandas al cliente.
