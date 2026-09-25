@@ -17,7 +17,7 @@ function guardarCarrito() {
 }
 
 function formatoPrecio(valor) {
-  return `${TIENDA.simboloMoneda}${valor.toLocaleString("es")} ${TIENDA.moneda}`;
+  return `${TIENDA.simboloMoneda}${valor.toLocaleString("es-CL")} ${TIENDA.moneda}`;
 }
 
 function productoPorId(id) {
@@ -35,7 +35,8 @@ function pintarCatalogo() {
       <h3>${p.nombre}</h3>
       <p class="descripcion">${p.descripcion}</p>
       <p class="precio">${formatoPrecio(p.precio)}</p>
-      <button class="boton-principal" data-id="${p.id}">Agregar al carrito</button>
+      ${p.linkPago ? `<a class="boton-principal" href="${p.linkPago}" target="_blank" rel="noopener">Comprar ahora</a>` : ""}
+      <button class="${p.linkPago ? "boton-secundario" : "boton-principal"}" data-id="${p.id}">Agregar al carrito</button>
     `;
     catalogo.appendChild(tarjeta);
   }
@@ -111,7 +112,7 @@ function enviarPedido(e) {
     `Total: ${formatoPrecio(total)}`,
     "",
     `Nombre: ${datos.get("nombre")}`,
-    `Ciudad / CP: ${datos.get("ciudad")}`,
+    `Dirección: ${datos.get("direccion")}, ${datos.get("comuna")}`,
   ].join("\n");
   window.open(`https://wa.me/${TIENDA.whatsapp}?text=${encodeURIComponent(mensaje)}`, "_blank");
 }
