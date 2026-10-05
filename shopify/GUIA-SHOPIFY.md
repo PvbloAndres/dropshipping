@@ -44,7 +44,7 @@ medir y repetir lo que funciona.
             │
             ▼
   El cliente lo recibe. Tú te quedas con la diferencia:
-  $19.990 (lo que pagó) − $9.000 (proveedor + envío) − comisiones ≈ $9.800
+  $19.990 (lo que pagó) − $9.000 (proveedor + envío) − comisiones ≈ $8.800
 ```
 
 **Tu negocio es la diferencia entre lo que cobra el proveedor y lo que pagas tú.**
@@ -55,8 +55,9 @@ Nunca tocas el producto.
   billetera de Dropi para que despachen. **Nunca pones plata tuya.** En Mercado Pago elige
   recibir el dinero al instante (la comisión es un poco más alta, pero no esperas días).
 - **Contra entrega:** el cliente paga al recibir y Dropi te deposita tu ganancia después de la
-  entrega. Vende más, porque da confianza. Pero **si el cliente rechaza el pedido, el envío de ida
-  y vuelta se descuenta de tu saldo.** Confirma cada pedido por WhatsApp antes de despacharlo.
+  entrega. Vende más, porque da confianza. Pero **si el cliente rechaza el pedido, lo pierdes.** Fuentes de 2026 dicen que Dropi ya no cobra el flete
+  de los rechazados, pero revisa las condiciones vigentes en tu panel. Con confirmación previa se reciben
+  65–78% de los pedidos contra entrega; sin confirmar, solo 50–60%. Confirma cada pedido por WhatsApp antes de despacharlo.
 
 ---
 
@@ -68,7 +69,7 @@ Nunca tocas el producto.
 | Shopify después de la oferta | Plan Basic **US$39/mes** (o US$29/mes pagando el año) **+ IVA 19%** | Se cobra aunque no vendas: si a los 3 meses no hay ventas, cancela |
 | Comisión de Shopify | **2% por venta** en el plan Basic | En Chile no existe Shopify Payments, así que Shopify cobra esto al usar otra pasarela |
 | Pasarela de pago (Mercado Pago) | Alrededor de **3,19% + IVA por venta** con dinero al instante | Revisa la tarifa vigente en tu cuenta |
-| Dropi y la app Dropify | **Gratis** | Pagas solo el producto y el envío de lo que vendes |
+| Dropi y la app Dropify | Sin mensualidad; Dropi cobra **hasta ~5% por pedido entregado** | Pagas el producto, el envío y esa comisión solo cuando vendes. Revisa la tarifa vigente en tu panel |
 | Este tema | **Gratis** | Ya está hecho |
 | Dominio propio (.cl o .com) | Opcional | Puedes partir con tunombre.myshopify.com |
 
@@ -80,7 +81,8 @@ Nunca tocas el producto.
 | Proveedor + envío en Dropi (estimado, confírmalo en Dropi) | − $9.000 |
 | Comisión Shopify 2% | − $400 |
 | Comisión Mercado Pago (~3,8% con IVA) | − $760 |
-| **Ganancia por venta** | **≈ $9.830** |
+| Comisión Dropi (hasta 5%) | − $1.000 |
+| **Ganancia por venta** | **≈ $8.830** |
 
 Con el plan Basic a unos **$44.000 al mes** (US$39 + IVA, a ~$950 por dólar; revisa el valor del
 día), **necesitas unas 5 ventas al mes solo para pagar Shopify.** De ahí en adelante es ganancia.
@@ -91,7 +93,39 @@ para cambios y, más adelante, publicidad.
 
 ---
 
-## 4. Configuración paso a paso
+## 4. Cómo elegir los mejores productos en Dropi
+
+Dropi muestra su catálogo solo con tu sesión iniciada. Hazlo así:
+
+1. **Filtra:** país Chile, solo proveedores **Verificados o Premium**, categoría Mascotas u Hogar.
+2. **Ordena por más vendidos** y anota el **stock** de tus candidatos. Vuelve en 3 días: si el stock
+   bajó, el producto se está vendiendo de verdad (así funcionan los rankings como Dropdata).
+3. **Revisa la ficha:** precio proveedor, precio sugerido, flete, peso y stock (ojalá 100 o más unidades).
+4. **Valida afuera de Dropi:**
+   - Busca el producto en TikTok: ¿hay videos con muchas vistas en Chile?
+   - Búscalo en la **Biblioteca de anuncios de Meta** (país Chile) y cuenta cuántas tiendas lo anuncian.
+     Con 5 o menos hay espacio; con más de 15 está saturado.
+   - Búscalo en Mercado Libre: si está mucho más barato, descártalo.
+5. **Pasa los números por el evaluador** (precio, flete, stock, riesgos) y prueba primero los 3 con mejor puntaje.
+
+**Qué conviene buscar ahora (octubre a diciembre):** productos de **$15.000 a $40.000** que resuelvan un
+problema diario, se entiendan en un video y no tengan batería ni sean cosméticos o alimentos:
+
+| Buscar en Dropi | Por qué ahora |
+|---|---|
+| Rodillo quita pelos / cepillo autolimpiante | Muda de primavera; se ve el resultado en 5 segundos |
+| Botella bebedero de paseo, tapete refrescante | Llega el calor |
+| Arnés antitirones | Muy viral; ojo con las tallas |
+| Alfombra olfativa, juguetes que sueltan premios | Regalo de Navidad para mascotas |
+| Bolsas al vacío y organizadores | Cambio de ropa de temporada; departamentos chicos |
+| Picador de verduras manual, organizadores de cocina | Se demuestran fácil en video |
+
+**Evita** lo que se enchufa o tiene batería (necesita certificación SEC), cosméticos y suplementos
+(registro en el ISP), alimentos (SAG) y lo que el retail vende más barato.
+
+---
+
+## 5. Configuración paso a paso
 
 Marca cada paso cuando lo termines.
 
@@ -161,7 +195,7 @@ Marca cada paso cuando lo termines.
 
 ---
 
-## 5. Cómo conseguir ventas
+## 6. Cómo conseguir ventas
 
 Sin clientes no hay negocio. El orden recomendado:
 
@@ -175,7 +209,7 @@ Sin clientes no hay negocio. El orden recomendado:
 
 ---
 
-## 6. Tu rutina diaria (≈1 hora)
+## 7. Tu rutina diaria (≈1 hora)
 
 1. **Pedidos:** revisa los nuevos en Shopify y confirma que pasaron a Dropi.
 2. **Contra entrega:** confirma cada pedido por WhatsApp antes del despacho.
@@ -186,19 +220,19 @@ Sin clientes no hay negocio. El orden recomendado:
 
 ---
 
-## 7. Errores que hacen perder plata
+## 8. Errores que hacen perder plata
 
 - **Vender lo que ya vende el retail** (celulares, teles, marcas): el cliente compara y compra más barato.
 - **Prometer plazos que no se cumplen:** genera reclamos, reembolsos y malas reseñas.
 - **Precios tachados o reseñas inventadas:** son ilegales en Chile.
-- **No confirmar los pedidos contra entrega:** cada rechazo te cuesta dos envíos.
+- **No confirmar los pedidos contra entrega:** se pierden muchas más ventas (50–60% recibidos sin confirmar, 65–78% confirmando).
 - **Quedarte sin saldo en Dropi:** los pedidos con tarjeta no se despachan.
 - **Llenar la tienda de apps de pago:** este tema ya trae carrito lateral, "Llévate también",
   fecha de entrega, barra de compra fija y botón de WhatsApp sin apps extra.
 
 ---
 
-## 8. Metas realistas
+## 9. Metas realistas
 
 | Etapa | Meta |
 |---|---|
@@ -227,6 +261,10 @@ Sin clientes no hay negocio. El orden recomendado:
 Si cambias algo del código del tema, vuelve a generar el .zip con `shopify/empaquetar.sh`.
 
 ## Fuentes
+- [Andrey Business: comisiones y fletes de Dropi Chile (2026)](https://www.andreybusiness.com/chile)
+- [Andrey Business: identificar productos ganadores en Chile](https://www.andreybusiness.com/chile/blog/identificar-productos-ganadores-con-tecnicas-de-expertos)
+- [Unidrop: cómo elegir productos ganadores](https://www.unidrop.com.ar/blog/como-elegir-productos-ganadores-dropshipping)
+- [Dropdata: ranking de productos en Dropi](https://www.dropdata.app/productos-ganadores-dropi/chile)
 - [Shopify: oferta de 3 meses a US$1 (2026)](https://www.demandsage.com/shopify-free-trial/)
 - [Forrate: pasarelas de pago para Shopify en Chile (2026)](https://forrate.cl/blog/pasarela-de-pago-shopify-chile)
 - [Webunica: comisiones de pago en Shopify Chile (2026)](https://webunica.cl/comisiones-plataformas-de-pago-para-shopify-chile)

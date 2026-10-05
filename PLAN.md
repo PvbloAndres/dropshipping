@@ -54,7 +54,9 @@ Ejemplo: proveedor $5.000 + envío $3.500 = $8.500 × 1,6 = $13.600, entonces ve
 Los `costo` de `productos.js` son **estimaciones**: confírmalos en Dropi antes de publicar.
 
 **Contra entrega:** el cliente paga al recibir y tú no pones plata. Pero **si el cliente rechaza el
-pedido, el envío de ida y vuelta se descuenta de tu saldo**. Por eso:
+pedido, pierdes la venta** (fuentes de 2026 dicen que Dropi ya no cobra el flete de los rechazados;
+revisa las condiciones vigentes en tu panel). Confirmando se reciben 65–78% de los pedidos; sin
+confirmar, solo 50–60%. Por eso:
 - Confirma **cada pedido** por WhatsApp antes de despacharlo ("Hola Ana, confirmamos tu pedido de...").
 - Si no responde en 24 horas, no lo despaches.
 - Prefiere transferencia o Mercado Pago: el dinero llega antes de despachar y no hay riesgo.
