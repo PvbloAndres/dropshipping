@@ -1,0 +1,34 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-producto",
+      "blocks": {
+        "b-1": { "type": "beneficio", "settings": { "icono": "escudo", "texto": "Pago 100% seguro" } },
+        "b-2": { "type": "beneficio", "settings": { "icono": "chat", "texto": "Atención por WhatsApp" } },
+        "b-3": { "type": "beneficio", "settings": { "icono": "check", "texto": "Garantía y 10 días de retracto" } },
+        "descripcion": { "type": "descripcion" },
+        "envios": {
+          "type": "acordeon",
+          "settings": {
+            "titulo": "Envíos",
+            "contenido": "<p>Envío incluido a todo Chile. Despachamos en 1 a 3 días hábiles y te enviamos el número de seguimiento apenas sale tu pedido.</p>"
+          }
+        },
+        "cambios": {
+          "type": "acordeon",
+          "settings": {
+            "titulo": "Cambios y garantía",
+            "contenido": "<p>Si tu producto llega con falla, escríbenos por WhatsApp con una foto y lo cambiamos o te devolvemos el dinero. Tienes 10 días desde que lo recibes para retractarte, sin uso y en su empaque.</p>"
+          }
+        }
+      },
+      "block_order": ["b-1", "b-2", "b-3", "descripcion", "envios", "cambios"],
+      "settings": { "texto_bajo_precio": "Envío incluido a todo Chile", "boton_compra_rapida": true, "mostrar_entrega": true }
+    },
+    "relacionados": {
+      "type": "recomendaciones",
+      "settings": { "titulo": "También te puede gustar", "cantidad": 4 }
+    }
+  },
+  "order": ["main", "relacionados"]
+}

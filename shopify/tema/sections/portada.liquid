@@ -1,0 +1,73 @@
+<section class="portada{% if section.settings.imagen != blank %} portada--con-imagen{% endif %}">
+  <div class="contenedor portada__grilla">
+    <div class="portada__texto">
+      {%- if section.settings.etiqueta != blank -%}
+        <p class="portada__etiqueta">{{ section.settings.etiqueta }}</p>
+      {%- endif -%}
+      <h1 class="portada__titulo">{{ section.settings.titulo }}</h1>
+      {%- if section.settings.subtitulo != blank -%}
+        <div class="portada__subtitulo">{{ section.settings.subtitulo }}</div>
+      {%- endif -%}
+      <div class="portada__botones">
+        {%- if section.settings.boton != blank -%}
+          <a class="boton boton--grande" href="{{ section.settings.enlace | default: routes.all_products_collection_url }}">
+            {{ section.settings.boton }} {% render 'icono', nombre: 'flecha' %}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.boton_2 != blank -%}
+          <a class="boton boton--secundario boton--grande" href="{{ section.settings.enlace_2 }}">{{ section.settings.boton_2 }}</a>
+        {%- endif -%}
+      </div>
+      {%- if section.blocks.size > 0 -%}
+        <ul class="portada__puntos">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>{% render 'icono', nombre: 'check' %} {{ block.settings.texto }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+    <div class="portada__media">
+      <div class="portada__mancha" aria-hidden="true"></div>
+      {%- if section.settings.imagen != blank -%}
+        {{
+          section.settings.imagen
+          | image_url: width: 1400
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            widths: '500, 800, 1100, 1400',
+            sizes: '(min-width: 990px) 50vw, 100vw',
+            class: 'portada__imagen'
+        }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'portada__imagen marcador' }}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Portada",
+  "class": "seccion-portada",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "image_picker", "id": "imagen", "label": "Imagen", "info": "Una foto real de una mascota usando tu producto funciona mejor que una de catálogo." },
+    { "type": "text", "id": "etiqueta", "label": "Etiqueta superior", "default": "Nuevo en Chile 🐾" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Paseos felices y una casa sin pelos" },
+    { "type": "richtext", "id": "subtitulo", "label": "Subtítulo", "default": "<p>Productos prácticos que resuelven los problemas del día a día con tu perro o gato. Envío gratis a todo Chile.</p>" },
+    { "type": "text", "id": "boton", "label": "Botón principal", "default": "Ver productos" },
+    { "type": "url", "id": "enlace", "label": "Enlace del botón principal", "default": "/collections/all" },
+    { "type": "text", "id": "boton_2", "label": "Botón secundario (opcional)" },
+    { "type": "url", "id": "enlace_2", "label": "Enlace del botón secundario" }
+  ],
+  "blocks": [
+    {
+      "type": "punto",
+      "name": "Punto destacado",
+      "settings": [{ "type": "text", "id": "texto", "label": "Texto", "default": "Envío gratis" }]
+    }
+  ],
+  "presets": [{ "name": "Portada", "blocks": [{ "type": "punto" }] }]
+}
+{% endschema %}

@@ -1,0 +1,55 @@
+<section class="seccion contenedor contenedor--angosto carrito-pagina">
+  <h1 class="seccion__titulo">{{ 'carrito.titulo' | t }}</h1>
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" class="carrito-pagina__form">
+      <ul class="carrito-pagina__lineas">
+        {%- for item in cart.items -%}
+          <li class="linea-carrito">
+            <a class="linea-carrito__foto" href="{{ item.url }}">
+              {%- if item.image -%}
+                {{ item.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: item.product.title }}
+              {%- endif -%}
+            </a>
+            <div class="linea-carrito__info">
+              <a class="linea-carrito__titulo" href="{{ item.url }}">{{ item.product.title }}</a>
+              {%- unless item.product.has_only_default_variant -%}
+                <span class="linea-carrito__variante">{{ item.variant.title }}</span>
+              {%- endunless -%}
+              <div class="linea-carrito__controles">
+                <label class="visualmente-oculto" for="cantidad-{{ forloop.index }}">{{ 'carrito.cantidad' | t }}</label>
+                <input class="carrito-pagina__cantidad" id="cantidad-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0">
+                <a class="linea-carrito__quitar" href="{{ item.url_to_remove }}">{{ 'carrito.quitar' | t }}</a>
+              </div>
+            </div>
+            <span class="linea-carrito__precio">{{ item.final_line_price | money }}</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      <div class="carrito-pagina__resumen">
+        <label for="nota-carrito">{{ 'carrito.nota' | t }}</label>
+        <textarea id="nota-carrito" name="note" rows="2">{{ cart.note }}</textarea>
+        <p class="carrito-lateral__total">
+          <span>{{ 'carrito.total' | t }}</span>
+          <strong>{{ cart.total_price | money }}</strong>
+        </p>
+        <div class="carrito-pagina__botones">
+          <button type="submit" name="update" class="boton boton--secundario">{{ 'carrito.actualizar' | t }}</button>
+          <button type="submit" name="checkout" class="boton boton--grande">{{ 'carrito.pagar' | t }}</button>
+        </div>
+      </div>
+    </form>
+  {%- else -%}
+    <div class="carrito-lateral__vacio">
+      <p>{{ 'carrito.vacio' | t }}</p>
+      <a class="boton" href="{{ routes.all_products_collection_url }}">{{ 'carrito.seguir_comprando' | t }}</a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Carrito",
+  "class": "seccion-carrito"
+}
+{% endschema %}

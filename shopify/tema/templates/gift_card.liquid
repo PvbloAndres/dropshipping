@@ -1,0 +1,26 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ 'tarjeta_regalo.titulo' | t: tienda: shop.name }}</title>
+    {% render 'variables-css' %}
+    {{ 'tema.css' | asset_url | stylesheet_tag }}
+    {{ content_for_header }}
+  </head>
+  <body>
+    <main class="seccion contenedor contenedor--angosto centrado">
+      <p class="encabezado__nombre">{{ shop.name }}</p>
+      <h1 class="seccion__titulo">{{ gift_card.initial_value | money }}</h1>
+      {%- if gift_card.enabled == false or gift_card.expired -%}
+        <p class="aviso">{{ 'tarjeta_regalo.no_disponible' | t }}</p>
+      {%- else -%}
+        {%- assign saldo = gift_card.balance | money -%}
+        <p>{{ 'tarjeta_regalo.saldo' | t: saldo: saldo }}</p>
+        <p class="tarjeta-regalo__codigo">{{ gift_card.code | format_code }}</p>
+        <a class="boton" href="{{ shop.url }}">{{ 'carrito.seguir_comprando' | t }}</a>
+      {%- endif -%}
+    </main>
+  </body>
+</html>

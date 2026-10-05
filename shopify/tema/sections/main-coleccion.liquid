@@ -1,0 +1,48 @@
+{%- paginate collection.products by section.settings.por_pagina -%}
+  <section class="seccion contenedor">
+    <div class="seccion__cabecera">
+      <div>
+        <h1 class="seccion__titulo">{{ collection.title }}</h1>
+        {%- if collection.description != blank -%}
+          <div class="rte seccion__descripcion">{{ collection.description }}</div>
+        {%- endif -%}
+      </div>
+      {%- if collection.products_count > 1 -%}
+        <form class="ordenar" data-ordenar>
+          <label for="ordenar-por">{{ 'coleccion.ordenar' | t }}</label>
+          <select id="ordenar-por" name="sort_by">
+            {%- assign orden = collection.sort_by | default: collection.default_sort_by -%}
+            {%- for opcion in collection.sort_options -%}
+              <option value="{{ opcion.value }}" {% if opcion.value == orden %}selected{% endif %}>{{ opcion.name }}</option>
+            {%- endfor -%}
+          </select>
+          <noscript><button type="submit" class="boton boton--chico">{{ 'coleccion.aplicar' | t }}</button></noscript>
+        </form>
+      {%- endif -%}
+    </div>
+
+    <div class="grilla-productos">
+      {%- for producto in collection.products -%}
+        {% render 'tarjeta-producto', producto: producto, indice: forloop.index %}
+      {%- else -%}
+        <p>{{ 'coleccion.vacia' | t }}</p>
+      {%- endfor -%}
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      <nav class="paginacion" aria-label="{{ 'general.paginacion' | t }}">
+        {{ paginate | default_pagination: previous: '←', next: '→' }}
+      </nav>
+    {%- endif -%}
+  </section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Colección",
+  "class": "seccion-coleccion-principal",
+  "settings": [
+    { "type": "range", "id": "por_pagina", "label": "Productos por página", "min": 8, "max": 48, "step": 4, "default": 24 }
+  ]
+}
+{% endschema %}

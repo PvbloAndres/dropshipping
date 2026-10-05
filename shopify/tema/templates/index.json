@@ -1,0 +1,70 @@
+{
+  "sections": {
+    "portada": {
+      "type": "portada",
+      "blocks": {
+        "punto-1": { "type": "punto", "settings": { "texto": "Envío gratis a todo Chile" } },
+        "punto-2": { "type": "punto", "settings": { "texto": "Llega en 1 a 3 días hábiles" } },
+        "punto-3": { "type": "punto", "settings": { "texto": "Pago seguro" } }
+      },
+      "block_order": ["punto-1", "punto-2", "punto-3"],
+      "settings": {
+        "etiqueta": "Nuevo en Chile 🐾",
+        "titulo": "Paseos felices y una casa sin pelos",
+        "subtitulo": "<p>Productos prácticos que resuelven los problemas del día a día con tu perro o gato.</p>",
+        "boton": "Ver productos",
+        "enlace": "/collections/all",
+        "boton_2": "",
+        "enlace_2": ""
+      }
+    },
+    "confianza": {
+      "type": "confianza",
+      "blocks": {
+        "c-1": { "type": "item", "settings": { "icono": "camion", "titulo": "Envío gratis", "texto": "A todo Chile" } },
+        "c-2": { "type": "item", "settings": { "icono": "reloj", "titulo": "1 a 3 días hábiles", "texto": "Despacho desde Chile" } },
+        "c-3": { "type": "item", "settings": { "icono": "tarjeta", "titulo": "Pago seguro", "texto": "Tarjeta, débito o transferencia" } },
+        "c-4": { "type": "item", "settings": { "icono": "escudo", "titulo": "Garantía", "texto": "Cambio si llega con falla" } }
+      },
+      "block_order": ["c-1", "c-2", "c-3", "c-4"]
+    },
+    "productos": {
+      "type": "coleccion-destacada",
+      "settings": { "etiqueta": "Para tu mascota", "titulo": "Nuestros productos", "cantidad": 8, "mostrar_ver_todo": true }
+    },
+    "como-funciona": {
+      "type": "como-funciona",
+      "blocks": {
+        "p-1": { "type": "paso", "settings": { "titulo": "Elige tu producto", "texto": "Agrégalo al carrito en un par de toques." } },
+        "p-2": { "type": "paso", "settings": { "titulo": "Paga seguro", "texto": "Con tarjeta de crédito, débito o transferencia." } },
+        "p-3": { "type": "paso", "settings": { "titulo": "Recíbelo en casa", "texto": "Te enviamos el número de seguimiento y llega en 1 a 3 días hábiles." } }
+      },
+      "block_order": ["p-1", "p-2", "p-3"],
+      "settings": { "titulo": "Comprar es fácil" }
+    },
+    "imagen-texto": {
+      "type": "imagen-texto",
+      "settings": {
+        "imagen_derecha": false,
+        "etiqueta": "Por qué elegirnos",
+        "titulo": "Pensado para la vida real con mascotas",
+        "texto": "<p>Elegimos productos que resuelven problemas concretos: pelos en el sillón, tirones en el paseo, calor en verano. Despachamos desde Chile y te acompañamos por WhatsApp hasta que tu pedido llega.</p>",
+        "boton": "Ver productos",
+        "enlace": "/collections/all"
+      }
+    },
+    "preguntas": {
+      "type": "preguntas",
+      "blocks": {
+        "q-1": { "type": "pregunta", "settings": { "pregunta": "¿Cuánto demora el envío?", "respuesta": "<p>Despachamos a todo Chile y tu pedido llega en 1 a 3 días hábiles. Apenas sale te enviamos el número de seguimiento.</p>" } },
+        "q-2": { "type": "pregunta", "settings": { "pregunta": "¿Cuánto cuesta el envío?", "respuesta": "<p>Nada extra: el precio que ves ya incluye el envío a cualquier comuna de Chile.</p>" } },
+        "q-3": { "type": "pregunta", "settings": { "pregunta": "¿Cómo pago?", "respuesta": "<p>Con tarjeta de crédito, débito o transferencia en nuestra página de pago segura.</p>" } },
+        "q-4": { "type": "pregunta", "settings": { "pregunta": "¿Qué pasa si el producto llega con falla?", "respuesta": "<p>Tienes garantía legal: escríbenos por WhatsApp con una foto y te lo cambiamos o te devolvemos el dinero.</p>" } },
+        "q-5": { "type": "pregunta", "settings": { "pregunta": "¿Puedo arrepentirme de la compra?", "respuesta": "<p>Sí. Tienes 10 días desde que recibes el producto para retractarte, siempre que esté sin uso y en su empaque.</p>" } }
+      },
+      "block_order": ["q-1", "q-2", "q-3", "q-4", "q-5"],
+      "settings": { "titulo": "Preguntas frecuentes" }
+    }
+  },
+  "order": ["portada", "confianza", "productos", "como-funciona", "imagen-texto", "preguntas"]
+}

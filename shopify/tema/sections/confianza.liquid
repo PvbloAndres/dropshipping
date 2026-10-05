@@ -1,0 +1,46 @@
+<section class="confianza">
+  <ul class="contenedor confianza__lista">
+    {%- for block in section.blocks -%}
+      <li class="confianza__item" {{ block.shopify_attributes }}>
+        <span class="confianza__icono">{% render 'icono', nombre: block.settings.icono %}</span>
+        <span>
+          <strong>{{ block.settings.titulo }}</strong>
+          {%- if block.settings.texto != blank -%}<br><small>{{ block.settings.texto }}</small>{%- endif -%}
+        </span>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% schema %}
+{
+  "name": "Barra de confianza",
+  "class": "seccion-confianza",
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Elemento",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icono",
+          "label": "Ícono",
+          "options": [
+            { "value": "camion", "label": "Camión" },
+            { "value": "reloj", "label": "Reloj" },
+            { "value": "tarjeta", "label": "Tarjeta" },
+            { "value": "escudo", "label": "Escudo" },
+            { "value": "chat", "label": "Chat" },
+            { "value": "regalo", "label": "Regalo" }
+          ],
+          "default": "camion"
+        },
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Envío gratis" },
+        { "type": "text", "id": "texto", "label": "Texto", "default": "A todo Chile" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Barra de confianza", "blocks": [{ "type": "item" }, { "type": "item" }, { "type": "item" }] }]
+}
+{% endschema %}

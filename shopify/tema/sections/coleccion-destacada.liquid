@@ -1,0 +1,47 @@
+{%- liquid
+  assign coleccion = section.settings.coleccion
+  if coleccion == blank
+    assign coleccion = collections['all']
+  endif
+-%}
+<section class="seccion contenedor">
+  <div class="seccion__cabecera">
+    <div>
+      {%- if section.settings.etiqueta != blank -%}<p class="seccion__etiqueta">{{ section.settings.etiqueta }}</p>{%- endif -%}
+      <h2 class="seccion__titulo">{{ section.settings.titulo }}</h2>
+    </div>
+    {%- if section.settings.mostrar_ver_todo and coleccion.url -%}
+      <a class="enlace-flecha" href="{{ coleccion.url }}">{{ 'coleccion.ver_todo' | t }} {% render 'icono', nombre: 'flecha' %}</a>
+    {%- endif -%}
+  </div>
+  <div class="grilla-productos">
+    {%- for producto in coleccion.products limit: section.settings.cantidad -%}
+      {% render 'tarjeta-producto', producto: producto, indice: forloop.index %}
+    {%- else -%}
+      {%- for i in (1..4) -%}
+        <article class="tarjeta-producto">
+          <div class="tarjeta-producto__foto">{{ 'product-apparel-1' | placeholder_svg_tag: 'marcador' }}</div>
+          <div class="tarjeta-producto__info">
+            <h3 class="tarjeta-producto__titulo">{{ 'coleccion.producto_ejemplo' | t }}</h3>
+            <div class="precio"><span class="precio__actual">$14.990</span></div>
+          </div>
+        </article>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Productos destacados",
+  "class": "seccion-coleccion",
+  "settings": [
+    { "type": "text", "id": "etiqueta", "label": "Etiqueta", "default": "Para tu mascota" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Nuestros productos" },
+    { "type": "collection", "id": "coleccion", "label": "Colección", "info": "Si no eliges una, se muestran todos los productos." },
+    { "type": "range", "id": "cantidad", "label": "Cantidad de productos", "min": 2, "max": 16, "step": 1, "default": 8 },
+    { "type": "checkbox", "id": "mostrar_ver_todo", "label": "Mostrar enlace \"Ver todo\"", "default": true }
+  ],
+  "presets": [{ "name": "Productos destacados" }]
+}
+{% endschema %}

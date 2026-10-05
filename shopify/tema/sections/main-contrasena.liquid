@@ -1,0 +1,36 @@
+<section class="seccion contenedor contenedor--angosto centrado contrasena">
+  <p class="encabezado__nombre">{{ shop.name }}</p>
+  <h1 class="seccion__titulo">{{ section.settings.titulo }}</h1>
+  {%- if shop.password_message != blank -%}
+    <p>{{ shop.password_message }}</p>
+  {%- endif -%}
+
+  {%- form 'customer', class: 'contrasena__form' -%}
+    <input type="hidden" name="contact[tags]" value="prospect,password page">
+    {%- if form.posted_successfully? -%}
+      <p class="aviso">{{ 'contrasena.gracias' | t }}</p>
+    {%- else -%}
+      <label class="visualmente-oculto" for="correo-aviso">{{ 'contrasena.correo' | t }}</label>
+      <input id="correo-aviso" type="email" name="contact[email]" placeholder="{{ 'contrasena.correo' | t }}" required>
+      <button type="submit" class="boton">{{ 'contrasena.avisarme' | t }}</button>
+    {%- endif -%}
+  {%- endform -%}
+
+  <details class="contrasena__duenio">
+    <summary>{{ 'contrasena.soy_duenio' | t }}</summary>
+    {%- form 'storefront_password' -%}
+      {{ form.errors | default_errors }}
+      <label class="visualmente-oculto" for="clave-tienda">{{ 'contrasena.clave' | t }}</label>
+      <input id="clave-tienda" type="password" name="password" placeholder="{{ 'contrasena.clave' | t }}">
+      <button type="submit" class="boton boton--secundario">{{ 'contrasena.entrar' | t }}</button>
+    {%- endform -%}
+  </details>
+</section>
+
+{% schema %}
+{
+  "name": "Página de contraseña",
+  "class": "seccion-contrasena",
+  "settings": [{ "type": "text", "id": "titulo", "label": "Título", "default": "Muy pronto abrimos 🐾" }]
+}
+{% endschema %}

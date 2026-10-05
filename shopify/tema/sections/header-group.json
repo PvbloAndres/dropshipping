@@ -1,0 +1,21 @@
+{
+  "type": "header",
+  "name": "Encabezado",
+  "sections": {
+    "anuncios": {
+      "type": "barra-anuncios",
+      "blocks": {
+        "anuncio-1": { "type": "anuncio", "settings": { "texto": "🚚 Envío gratis a todo Chile" } },
+        "anuncio-2": { "type": "anuncio", "settings": { "texto": "📦 Despacho en 1 a 3 días hábiles" } },
+        "anuncio-3": { "type": "anuncio", "settings": { "texto": "💳 Paga con tarjeta, débito o transferencia" } },
+        "anuncio-4": { "type": "anuncio", "settings": { "texto": "💬 Atención por WhatsApp" } }
+      },
+      "block_order": ["anuncio-1", "anuncio-2", "anuncio-3", "anuncio-4"]
+    },
+    "encabezado": {
+      "type": "encabezado",
+      "settings": { "menu": "main-menu", "ancho_logo": 140 }
+    }
+  },
+  "order": ["anuncios", "encabezado"]
+}

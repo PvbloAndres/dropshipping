@@ -6,6 +6,9 @@ Mercado Pago) o usas pago contra entrega con Dropi, y el proveedor despacha. No 
 
 📋 **El estudio de mercado, el proveedor, el plan de contenido y la operación diaria están en [PLAN.md](PLAN.md).**
 
+🛍️ **¿Prefieres Shopify?** En [`shopify/`](shopify/) está el tema listo para subir
+(`patas-contentas-tema-shopify.zip`) y la guía paso a paso [GUIA-SHOPIFY.md](shopify/GUIA-SHOPIFY.md).
+
 ## Ponla en línea (10 minutos)
 
 1. **Configura tus datos** en `productos.js`:

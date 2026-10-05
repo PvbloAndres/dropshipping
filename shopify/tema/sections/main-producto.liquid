@@ -1,0 +1,191 @@
+{%- liquid
+  assign variante = product.selected_or_first_available_variant
+  assign id_form = 'form-producto-' | append: section.id
+-%}
+<section class="producto contenedor" data-producto data-seccion="{{ section.id }}">
+  <div class="producto__galeria" data-galeria>
+    <div class="producto__fotos" data-fotos>
+      {%- for media in product.media -%}
+        {%- liquid
+          assign carga = 'lazy'
+          if forloop.first
+            assign carga = 'eager'
+          endif
+        -%}
+        <div class="producto__foto" data-media-id="{{ media.id }}">
+          {%- case media.media_type -%}
+            {%- when 'image' -%}
+              {{
+                media
+                | image_url: width: 1400
+                | image_tag:
+                  loading: carga,
+                  widths: '400, 700, 1000, 1400',
+                  sizes: '(min-width: 990px) 55vw, 100vw',
+                  alt: media.alt | default: product.title
+              }}
+            {%- when 'video' -%}
+              {{ media | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true }}
+            {%- else -%}
+              {{ media | media_tag }}
+          {%- endcase -%}
+        </div>
+      {%- else -%}
+        <div class="producto__foto">{{ 'product-apparel-1' | placeholder_svg_tag: 'marcador' }}</div>
+      {%- endfor -%}
+    </div>
+    {%- if product.media.size > 1 -%}
+      <div class="producto__miniaturas">
+        {%- for media in product.media -%}
+          <button type="button" class="producto__miniatura" data-ir-a="{{ media.id }}" aria-label="{{ 'producto.ver_foto' | t: numero: forloop.index }}" {% if forloop.first %}aria-current="true"{% endif %}>
+            {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="producto__info">
+    <h1 class="producto__titulo">{{ product.title }}</h1>
+    <div data-precio-producto>{% render 'precio', producto: product, variante: variante %}</div>
+    {%- if section.settings.texto_bajo_precio != blank -%}
+      <p class="producto__nota-precio">{{ section.settings.texto_bajo_precio }}</p>
+    {%- endif -%}
+
+    {%- form 'product', product, id: id_form, class: 'producto__form', data-agregar-carrito: '' -%}
+      <input type="hidden" name="id" value="{{ variante.id }}" data-variante-id>
+
+      {%- unless product.has_only_default_variant -%}
+        {%- for opcion in product.options_with_values -%}
+          <fieldset class="opcion" data-opcion>
+            <legend>{{ opcion.name }}: <span data-opcion-elegida>{{ opcion.selected_value }}</span></legend>
+            <div class="opcion__valores">
+              {%- for valor in opcion.values -%}
+                <label class="opcion__valor">
+                  <input
+                    type="radio"
+                    name="opcion-{{ forloop.parentloop.index }}"
+                    value="{{ valor | escape }}"
+                    {% if opcion.selected_value == valor %}checked{% endif %}
+                  >
+                  <span>{{ valor }}</span>
+                </label>
+              {%- endfor -%}
+            </div>
+          </fieldset>
+        {%- endfor -%}
+        <script type="application/json" data-variantes>
+          {{ product.variants | json }}
+        </script>
+      {%- endunless -%}
+
+      <div class="producto__comprar">
+        <div class="cantidad" data-cantidad>
+          <button type="button" data-cantidad-cambiar="-1" aria-label="{{ 'carrito.quitar_uno' | t }}">{% render 'icono', nombre: 'menos' %}</button>
+          <input type="number" name="quantity" value="1" min="1" max="20" aria-label="{{ 'carrito.cantidad' | t }}">
+          <button type="button" data-cantidad-cambiar="1" aria-label="{{ 'carrito.agregar_uno' | t }}">{% render 'icono', nombre: 'mas' %}</button>
+        </div>
+        <button
+          type="submit"
+          class="boton boton--grande boton--ancho"
+          data-boton-agregar
+          {% unless variante.available %}disabled{% endunless %}
+        >
+          {%- if variante.available -%}{{ 'producto.agregar' | t }}{%- else -%}{{ 'producto.agotado' | t }}{%- endif -%}
+        </button>
+      </div>
+      {%- if section.settings.boton_compra_rapida -%}
+        <div class="producto__compra-rapida">{{ form | payment_button }}</div>
+      {%- endif -%}
+      <p class="producto__error" data-error-carrito role="alert" hidden></p>
+    {%- endform -%}
+
+    {%- if section.settings.mostrar_entrega -%}
+      <p class="producto__entrega" data-estimacion-entrega>
+        {% render 'icono', nombre: 'camion' %}
+        <span>{{ 'producto.entrega_estimada' | t }}</span>
+      </p>
+    {%- endif -%}
+
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'beneficio' -%}
+          <p class="producto__beneficio" {{ block.shopify_attributes }}>
+            {% render 'icono', nombre: block.settings.icono %} <span>{{ block.settings.texto }}</span>
+          </p>
+        {%- when 'descripcion' -%}
+          <details class="acordeon" open {{ block.shopify_attributes }}>
+            <summary>{{ 'producto.descripcion' | t }} {% render 'icono', nombre: 'mas' %}</summary>
+            <div class="rte">{{ product.description }}</div>
+          </details>
+        {%- when 'acordeon' -%}
+          <details class="acordeon" {{ block.shopify_attributes }}>
+            <summary>{{ block.settings.titulo }} {% render 'icono', nombre: 'mas' %}</summary>
+            <div class="rte">
+              {{ block.settings.contenido }}
+              {%- if block.settings.pagina != blank -%}{{ block.settings.pagina.content }}{%- endif -%}
+            </div>
+          </details>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+
+  <div class="barra-compra" data-barra-compra hidden>
+    <div class="barra-compra__info">
+      <span class="barra-compra__titulo">{{ product.title }}</span>
+      <span class="barra-compra__precio" data-barra-precio>{{ variante.price | money }}</span>
+    </div>
+    <button type="submit" form="{{ id_form }}" class="boton" data-boton-agregar {% unless variante.available %}disabled{% endunless %}>
+      {%- if variante.available -%}{{ 'producto.agregar' | t }}{%- else -%}{{ 'producto.agotado' | t }}{%- endif -%}
+    </button>
+  </div>
+</section>
+
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "Producto",
+  "class": "seccion-producto",
+  "settings": [
+    { "type": "text", "id": "texto_bajo_precio", "label": "Texto bajo el precio", "default": "Envío incluido a todo Chile" },
+    { "type": "checkbox", "id": "boton_compra_rapida", "label": "Mostrar botón \"Comprar ahora\"", "info": "Lleva directo al pago sin pasar por el carrito.", "default": true },
+    { "type": "checkbox", "id": "mostrar_entrega", "label": "Mostrar fecha estimada de entrega", "info": "Se calcula con el plazo de entrega de Configuración del tema → Tienda.", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "beneficio",
+      "name": "Beneficio",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icono",
+          "label": "Ícono",
+          "options": [
+            { "value": "check", "label": "Check" },
+            { "value": "escudo", "label": "Escudo" },
+            { "value": "tarjeta", "label": "Tarjeta" },
+            { "value": "chat", "label": "Chat" },
+            { "value": "regalo", "label": "Regalo" },
+            { "value": "reloj", "label": "Reloj" }
+          ],
+          "default": "check"
+        },
+        { "type": "text", "id": "texto", "label": "Texto", "default": "Pago 100% seguro" }
+      ]
+    },
+    { "type": "descripcion", "name": "Descripción", "limit": 1 },
+    {
+      "type": "acordeon",
+      "name": "Desplegable",
+      "settings": [
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Envíos y cambios" },
+        { "type": "richtext", "id": "contenido", "label": "Contenido" },
+        { "type": "page", "id": "pagina", "label": "Mostrar el contenido de una página" }
+      ]
+    }
+  ]
+}
+{% endschema %}

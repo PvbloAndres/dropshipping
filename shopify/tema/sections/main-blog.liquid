@@ -1,0 +1,24 @@
+{%- paginate blog.articles by 12 -%}
+  <section class="seccion contenedor">
+    <h1 class="seccion__titulo">{{ blog.title }}</h1>
+    <div class="grilla-colecciones">
+      {%- for articulo in blog.articles -%}
+        <a class="tarjeta-coleccion" href="{{ articulo.url }}">
+          {%- if articulo.image -%}
+            {{ articulo.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', sizes: '(min-width: 990px) 33vw, 50vw' }}
+          {%- endif -%}
+          <span>{{ articulo.title }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+    {%- if paginate.pages > 1 -%}
+      <nav class="paginacion" aria-label="{{ 'general.paginacion' | t }}">
+        {{ paginate | default_pagination: previous: '←', next: '→' }}
+      </nav>
+    {%- endif -%}
+  </section>
+{%- endpaginate -%}
+
+{% schema %}
+{ "name": "Blog", "class": "seccion-blog" }
+{% endschema %}

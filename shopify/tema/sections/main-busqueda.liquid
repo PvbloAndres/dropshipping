@@ -1,0 +1,31 @@
+<section class="seccion contenedor">
+  <h1 class="seccion__titulo">{{ 'busqueda.titulo' | t }}</h1>
+  <form action="{{ routes.search_url }}" method="get" role="search" class="busqueda">
+    <input type="hidden" name="type" value="product">
+    <label class="visualmente-oculto" for="termino">{{ 'general.buscar' | t }}</label>
+    <input id="termino" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'busqueda.placeholder' | t }}">
+    <button type="submit" class="boton">{% render 'icono', nombre: 'buscar' %} {{ 'general.buscar' | t }}</button>
+  </form>
+
+  {%- if search.performed -%}
+    {%- paginate search.results by 24 -%}
+      <p class="busqueda__resumen">{{ 'busqueda.resultados' | t: count: search.results_count, termino: search.terms }}</p>
+      <div class="grilla-productos">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'tarjeta-producto', producto: item, indice: forloop.index %}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav class="paginacion" aria-label="{{ 'general.paginacion' | t }}">
+          {{ paginate | default_pagination: previous: '←', next: '→' }}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{ "name": "Búsqueda", "class": "seccion-busqueda" }
+{% endschema %}

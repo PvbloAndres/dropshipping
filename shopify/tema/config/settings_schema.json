@@ -1,0 +1,76 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Patas Contentas",
+    "theme_version": "1.0.0",
+    "theme_author": "Patas Contentas",
+    "theme_documentation_url": "https://github.com/PvbloAndres/dropshipping",
+    "theme_support_url": "https://github.com/PvbloAndres/dropshipping"
+  },
+  {
+    "name": "Colores",
+    "settings": [
+      { "type": "color", "id": "color_fondo", "label": "Fondo", "default": "#FBF8F3" },
+      { "type": "color", "id": "color_superficie", "label": "Tarjetas y recuadros", "default": "#FFFFFF" },
+      { "type": "color", "id": "color_texto", "label": "Texto", "default": "#2A2320" },
+      { "type": "color", "id": "color_acento", "label": "Color principal (botones)", "default": "#E0612F" },
+      { "type": "color", "id": "color_acento_texto", "label": "Texto de los botones", "default": "#FFFFFF" },
+      { "type": "color", "id": "color_suave", "label": "Fondo suave (fotos y destacados)", "default": "#FDE9DF" },
+      { "type": "color", "id": "color_oferta", "label": "Etiquetas de descuento", "default": "#1F8A5B" }
+    ]
+  },
+  {
+    "name": "Tipografía",
+    "settings": [
+      { "type": "font_picker", "id": "fuente_titulos", "label": "Títulos", "default": "work_sans_n4" },
+      { "type": "font_picker", "id": "fuente_texto", "label": "Texto", "default": "work_sans_n4" }
+    ]
+  },
+  {
+    "name": "Tienda",
+    "settings": [
+      {
+        "type": "text",
+        "id": "whatsapp",
+        "label": "Número de WhatsApp",
+        "info": "Con código de país, solo números. Ej: 56912345678. Déjalo vacío para ocultar el botón.",
+        "default": "56935835960"
+      },
+      {
+        "type": "header",
+        "content": "Plazo de entrega"
+      },
+      {
+        "type": "paragraph",
+        "content": "Se usa para mostrar \"Recíbelo entre el … y el …\" en cada producto. Pon el plazo REAL de tu proveedor: con Dropi Chile suele ser de 1 a 3 días hábiles."
+      },
+      { "type": "range", "id": "entrega_min", "label": "Días hábiles mínimos", "min": 1, "max": 30, "step": 1, "default": 1 },
+      { "type": "range", "id": "entrega_max", "label": "Días hábiles máximos", "min": 1, "max": 30, "step": 1, "default": 3 },
+      {
+        "type": "range",
+        "id": "hora_corte",
+        "label": "Hora de corte del despacho",
+        "info": "Los pedidos hechos después de esta hora se cuentan desde el día hábil siguiente.",
+        "min": 8,
+        "max": 22,
+        "step": 1,
+        "unit": "h",
+        "default": 14
+      }
+    ]
+  },
+  {
+    "name": "Redes sociales",
+    "settings": [
+      { "type": "text", "id": "instagram", "label": "Usuario de Instagram (sin @)" },
+      { "type": "text", "id": "tiktok", "label": "Usuario de TikTok (sin @)" },
+      { "type": "text", "id": "facebook", "label": "Página de Facebook (dirección completa)" }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Ícono de la pestaña", "info": "Imagen cuadrada de 32 x 32 px." }
+    ]
+  }
+]

@@ -1,0 +1,44 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="barra-anuncios" {{ section.shopify_attributes }}>
+    <div class="barra-anuncios__pista{% if section.blocks.size > 1 %} barra-anuncios__pista--animada{% endif %}">
+      {%- comment -%} La lista se repite para que el desplazamiento sea continuo {%- endcomment -%}
+      {%- for i in (1..2) -%}
+        <ul class="barra-anuncios__lista" {% if forloop.index == 2 %}aria-hidden="true"{% endif %}>
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>
+              {%- if block.settings.enlace != blank -%}
+                <a href="{{ block.settings.enlace }}">{{ block.settings.texto }}</a>
+              {%- else -%}
+                {{ block.settings.texto }}
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Barra de anuncios",
+  "class": "seccion-barra-anuncios",
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "anuncio",
+      "name": "Anuncio",
+      "settings": [
+        { "type": "text", "id": "texto", "label": "Texto", "default": "Envío gratis a todo Chile" },
+        { "type": "url", "id": "enlace", "label": "Enlace (opcional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de anuncios",
+      "blocks": [{ "type": "anuncio" }]
+    }
+  ]
+}
+{% endschema %}

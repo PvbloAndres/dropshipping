@@ -1,0 +1,35 @@
+{%- doc -%}
+  Línea de producto dentro del carrito lateral.
+  @param {object} item - línea del carrito
+  @param {number} linea - número de línea (empieza en 1)
+{%- enddoc -%}
+<li class="linea-carrito">
+  <a class="linea-carrito__foto" href="{{ item.url }}">
+    {%- if item.image -%}
+      {{ item.image | image_url: width: 200 | image_tag: loading: 'lazy', alt: item.product.title }}
+    {%- else -%}
+      {{ 'product-apparel-1' | placeholder_svg_tag: 'marcador' }}
+    {%- endif -%}
+  </a>
+  <div class="linea-carrito__info">
+    <a class="linea-carrito__titulo" href="{{ item.url }}">{{ item.product.title }}</a>
+    {%- unless item.product.has_only_default_variant -%}
+      <span class="linea-carrito__variante">{{ item.variant.title }}</span>
+    {%- endunless -%}
+    <div class="linea-carrito__controles">
+      <div class="cantidad cantidad--chica">
+        <button type="button" data-cambiar-linea="{{ linea }}" data-nueva-cantidad="{{ item.quantity | minus: 1 }}" aria-label="{{ 'carrito.quitar_uno' | t }}">
+          {% render 'icono', nombre: 'menos' %}
+        </button>
+        <span aria-label="{{ 'carrito.cantidad' | t }}">{{ item.quantity }}</span>
+        <button type="button" data-cambiar-linea="{{ linea }}" data-nueva-cantidad="{{ item.quantity | plus: 1 }}" aria-label="{{ 'carrito.agregar_uno' | t }}">
+          {% render 'icono', nombre: 'mas' %}
+        </button>
+      </div>
+      <button type="button" class="linea-carrito__quitar" data-cambiar-linea="{{ linea }}" data-nueva-cantidad="0">
+        {{ 'carrito.quitar' | t }}
+      </button>
+    </div>
+  </div>
+  <span class="linea-carrito__precio">{{ item.final_line_price | money }}</span>
+</li>

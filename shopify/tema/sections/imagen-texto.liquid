@@ -1,0 +1,43 @@
+<section class="seccion contenedor imagen-texto{% if section.settings.imagen_derecha %} imagen-texto--invertido{% endif %}">
+  <div class="imagen-texto__media">
+    {%- if section.settings.imagen != blank -%}
+      {{
+        section.settings.imagen
+        | image_url: width: 1200
+        | image_tag: loading: 'lazy', widths: '400, 700, 1000, 1200', sizes: '(min-width: 990px) 50vw, 100vw'
+      }}
+    {%- else -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'marcador' }}
+    {%- endif -%}
+  </div>
+  <div class="imagen-texto__texto">
+    {%- if section.settings.etiqueta != blank -%}<p class="seccion__etiqueta">{{ section.settings.etiqueta }}</p>{%- endif -%}
+    <h2 class="seccion__titulo">{{ section.settings.titulo }}</h2>
+    <div class="rte">{{ section.settings.texto }}</div>
+    {%- if section.settings.boton != blank -%}
+      <a class="boton" href="{{ section.settings.enlace | default: routes.all_products_collection_url }}">{{ section.settings.boton }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Imagen con texto",
+  "class": "seccion-imagen-texto",
+  "settings": [
+    { "type": "image_picker", "id": "imagen", "label": "Imagen" },
+    { "type": "checkbox", "id": "imagen_derecha", "label": "Imagen a la derecha", "default": false },
+    { "type": "text", "id": "etiqueta", "label": "Etiqueta", "default": "Por qué elegirnos" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Pensado para la vida real con mascotas" },
+    {
+      "type": "richtext",
+      "id": "texto",
+      "label": "Texto",
+      "default": "<p>Elegimos productos que resuelven problemas concretos: pelos en el sillón, tirones en el paseo, calor en verano. Despachamos desde Chile y te acompañamos por WhatsApp hasta que tu pedido llega.</p>"
+    },
+    { "type": "text", "id": "boton", "label": "Botón", "default": "Ver productos" },
+    { "type": "url", "id": "enlace", "label": "Enlace del botón", "default": "/collections/all" }
+  ],
+  "presets": [{ "name": "Imagen con texto" }]
+}
+{% endschema %}

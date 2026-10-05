@@ -1,0 +1,71 @@
+{%- assign menu = linklists[section.settings.menu] -%}
+<header class="encabezado" data-encabezado>
+  <div class="encabezado__fila contenedor">
+    <details class="menu-movil" data-menu-movil>
+      <summary class="boton-icono" aria-label="{{ 'general.menu' | t }}">
+        {% render 'icono', nombre: 'menu' %}
+      </summary>
+      <div class="menu-movil__panel">
+        <nav aria-label="{{ 'general.menu' | t }}">
+          <ul>
+            {%- for link in menu.links -%}
+              <li><a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a></li>
+              {%- for hijo in link.links -%}
+                <li class="menu-movil__hijo"><a href="{{ hijo.url }}">{{ hijo.title }}</a></li>
+              {%- endfor -%}
+            {%- endfor -%}
+          </ul>
+        </nav>
+      </div>
+    </details>
+
+    <a href="{{ routes.root_url }}" class="encabezado__logo">
+      {%- if section.settings.logo != blank -%}
+        {%- assign estilo_logo = 'max-width: ' | append: section.settings.ancho_logo | append: 'px' -%}
+        {{
+          section.settings.logo
+          | image_url: width: 400
+          | image_tag:
+            alt: shop.name,
+            loading: 'eager',
+            style: estilo_logo,
+            widths: '200, 300, 400'
+        }}
+      {%- else -%}
+        <span class="encabezado__nombre">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="encabezado__menu" aria-label="{{ 'general.menu' | t }}">
+      <ul>
+        {%- for link in menu.links -%}
+          <li><a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="encabezado__acciones">
+      <a href="{{ routes.search_url }}" class="boton-icono" aria-label="{{ 'general.buscar' | t }}">
+        {% render 'icono', nombre: 'buscar' %}
+      </a>
+      <a href="{{ routes.cart_url }}" class="boton-icono boton-carrito" data-abrir-carrito aria-label="{{ 'carrito.titulo' | t }}">
+        {% render 'icono', nombre: 'carrito' %}
+        <span class="boton-carrito__contador" data-contador-carrito {% if cart.item_count == 0 %}hidden{% endif %}>
+          {{- cart.item_count -}}
+        </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Encabezado",
+  "class": "seccion-encabezado",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo", "info": "Si no subes un logo se muestra el nombre de la tienda." },
+    { "type": "range", "id": "ancho_logo", "label": "Ancho del logo", "min": 60, "max": 260, "step": 10, "unit": "px", "default": 140 },
+    { "type": "link_list", "id": "menu", "label": "Menú", "default": "main-menu" }
+  ]
+}
+{% endschema %}

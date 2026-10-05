@@ -1,0 +1,18 @@
+{%- doc -%}
+  Precio con precio anterior y porcentaje de descuento (solo si "Precio de comparación" está definido en Shopify).
+  @param {object} producto - producto
+  @param {object} [variante] - variante seleccionada
+{%- enddoc -%}
+{%- liquid
+  assign item = variante | default: producto.selected_or_first_available_variant
+  assign precio = item.price
+  assign anterior = item.compare_at_price
+-%}
+<div class="precio{% if anterior > precio %} precio--oferta{% endif %}" data-precio>
+  <span class="precio__actual">{{ precio | money }}</span>
+  {%- if anterior > precio -%}
+    {%- assign descuento = anterior | minus: precio | times: 100.0 | divided_by: anterior | round -%}
+    <s class="precio__anterior">{{ anterior | money }}</s>
+    <span class="etiqueta etiqueta--oferta">-{{ descuento }}%</span>
+  {%- endif -%}
+</div>

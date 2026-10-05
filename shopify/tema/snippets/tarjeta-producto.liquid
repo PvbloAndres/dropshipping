@@ -1,0 +1,66 @@
+{%- doc -%}
+  Tarjeta de producto para grillas.
+  @param {object} producto - producto
+  @param {number} [indice] - posición en la grilla (las primeras imágenes cargan antes)
+{%- enddoc -%}
+{%- liquid
+  assign variante = producto.selected_or_first_available_variant
+  assign carga = 'lazy'
+  if indice and indice <= 2
+    assign carga = 'eager'
+  endif
+-%}
+<article class="tarjeta-producto">
+  <a class="tarjeta-producto__foto" href="{{ producto.url }}" aria-label="{{ producto.title | escape }}">
+    {%- if producto.featured_media -%}
+      {{
+        producto.featured_media
+        | image_url: width: 900
+        | image_tag:
+          loading: carga,
+          widths: '300, 450, 600, 900',
+          sizes: '(min-width: 990px) 25vw, 50vw',
+          alt: producto.featured_media.alt | default: producto.title
+      }}
+      {%- if producto.media[1] -%}
+        {{
+          producto.media[1]
+          | image_url: width: 900
+          | image_tag:
+            loading: 'lazy',
+            class: 'tarjeta-producto__foto-2',
+            widths: '300, 450, 600, 900',
+            sizes: '(min-width: 990px) 25vw, 50vw',
+            alt: ''
+        }}
+      {%- endif -%}
+    {%- else -%}
+      {{ 'product-apparel-1' | placeholder_svg_tag: 'marcador' }}
+    {%- endif -%}
+    {%- if producto.available == false -%}
+      <span class="etiqueta etiqueta--agotado">{{ 'producto.agotado' | t }}</span>
+    {%- elsif variante.compare_at_price > variante.price -%}
+      <span class="etiqueta etiqueta--oferta">{{ 'producto.oferta' | t }}</span>
+    {%- endif -%}
+  </a>
+  <div class="tarjeta-producto__info">
+    <h3 class="tarjeta-producto__titulo"><a href="{{ producto.url }}">{{ producto.title }}</a></h3>
+    {% render 'precio', producto: producto %}
+  </div>
+  {%- if producto.available -%}
+    {%- if producto.has_only_default_variant -%}
+      {%- form 'product', producto, class: 'tarjeta-producto__agregar', data-agregar-carrito: '' -%}
+        <input type="hidden" name="id" value="{{ variante.id }}">
+        <button type="submit" class="boton boton--secundario boton--chico">
+          {% render 'icono', nombre: 'mas' %}
+          <span class="solo-escritorio">{{ 'producto.agregar' | t }}</span>
+          <span class="solo-movil">{{ 'carrito.agregar_corto' | t }}</span>
+        </button>
+      {%- endform -%}
+    {%- else -%}
+      <a class="boton boton--secundario boton--chico" href="{{ producto.url }}">
+        {{ 'producto.elegir_opciones' | t }}
+      </a>
+    {%- endif -%}
+  {%- endif -%}
+</article>

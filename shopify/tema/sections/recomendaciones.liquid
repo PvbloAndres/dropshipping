@@ -1,0 +1,28 @@
+<section
+  class="seccion contenedor recomendaciones"
+  data-recomendaciones
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.cantidad }}&intent=related"
+>
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <div class="seccion__cabecera">
+      <h2 class="seccion__titulo">{{ section.settings.titulo }}</h2>
+    </div>
+    <div class="grilla-productos">
+      {%- for producto in recommendations.products -%}
+        {% render 'tarjeta-producto', producto: producto, indice: 10 %}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Productos relacionados",
+  "class": "seccion-recomendaciones",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "También te puede gustar" },
+    { "type": "range", "id": "cantidad", "label": "Cantidad de productos", "min": 2, "max": 8, "step": 1, "default": 4 }
+  ],
+  "presets": [{ "name": "Productos relacionados" }]
+}
+{% endschema %}

@@ -1,0 +1,30 @@
+<section class="seccion contenedor contenedor--angosto preguntas">
+  <div class="seccion__cabecera seccion__cabecera--centro">
+    <h2 class="seccion__titulo">{{ section.settings.titulo }}</h2>
+  </div>
+  {%- for block in section.blocks -%}
+    <details class="acordeon" {{ block.shopify_attributes }}>
+      <summary>{{ block.settings.pregunta }} {% render 'icono', nombre: 'mas' %}</summary>
+      <div class="rte">{{ block.settings.respuesta }}</div>
+    </details>
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "Preguntas frecuentes",
+  "class": "seccion-preguntas",
+  "settings": [{ "type": "text", "id": "titulo", "label": "Título", "default": "Preguntas frecuentes" }],
+  "blocks": [
+    {
+      "type": "pregunta",
+      "name": "Pregunta",
+      "settings": [
+        { "type": "text", "id": "pregunta", "label": "Pregunta", "default": "¿Cuánto demora el envío?" },
+        { "type": "richtext", "id": "respuesta", "label": "Respuesta", "default": "<p>Despachamos a todo Chile en 1 a 3 días hábiles.</p>" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Preguntas frecuentes", "blocks": [{ "type": "pregunta" }] }]
+}
+{% endschema %}

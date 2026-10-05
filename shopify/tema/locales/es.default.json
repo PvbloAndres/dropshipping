@@ -1,0 +1,72 @@
+{
+  "general": {
+    "saltar_contenido": "Ir al contenido",
+    "menu": "Menú",
+    "buscar": "Buscar",
+    "cerrar": "Cerrar",
+    "pagina": "Página {{ numero }}",
+    "paginacion": "Paginación",
+    "politicas": "Políticas",
+    "medios_pago": "Medios de pago",
+    "no_encontrada": "No encontramos esta página",
+    "whatsapp": "Escríbenos por WhatsApp",
+    "whatsapp_mensaje": "Hola {{ tienda }}, tengo una consulta"
+  },
+  "producto": {
+    "agregar": "Agregar al carrito",
+    "agregando": "Agregando…",
+    "agotado": "Agotado",
+    "no_disponible": "No disponible",
+    "oferta": "Oferta",
+    "elegir_opciones": "Elegir opciones",
+    "descripcion": "Descripción",
+    "ver_foto": "Ver foto {{ numero }}",
+    "entrega_estimada": "Envío a todo Chile",
+    "entrega_rango": "Pide hoy y recíbelo entre el {desde} y el {hasta}",
+    "entrega_dia": "Pide hoy y recíbelo el {dia}"
+  },
+  "coleccion": {
+    "ver_todo": "Ver todo",
+    "ordenar": "Ordenar por",
+    "aplicar": "Aplicar",
+    "vacia": "Todavía no hay productos en esta colección.",
+    "todas": "Colecciones",
+    "producto_ejemplo": "Tu producto"
+  },
+  "carrito": {
+    "titulo": "Tu carrito",
+    "vacio": "Tu carrito está vacío",
+    "seguir_comprando": "Ver productos",
+    "total": "Total",
+    "pagar": "Ir a pagar",
+    "actualizar": "Actualizar",
+    "quitar": "Quitar",
+    "quitar_uno": "Quitar uno",
+    "agregar_uno": "Agregar uno",
+    "agregar_corto": "Agregar",
+    "cantidad": "Cantidad",
+    "nota": "Nota para tu pedido (opcional)",
+    "error": "No pudimos agregar el producto. Intenta de nuevo."
+  },
+  "busqueda": {
+    "titulo": "Buscar",
+    "placeholder": "¿Qué buscas para tu mascota?",
+    "resultados": {
+      "one": "1 resultado para \"{{ termino }}\"",
+      "other": "{{ count }} resultados para \"{{ termino }}\""
+    }
+  },
+  "contrasena": {
+    "correo": "Tu correo",
+    "avisarme": "Avísame",
+    "gracias": "¡Listo! Te avisaremos cuando abramos.",
+    "soy_duenio": "¿Eres el dueño? Entra aquí",
+    "clave": "Contraseña",
+    "entrar": "Entrar"
+  },
+  "tarjeta_regalo": {
+    "titulo": "Tarjeta de regalo de {{ tienda }}",
+    "saldo": "Saldo disponible: {{ saldo }}",
+    "no_disponible": "Esta tarjeta de regalo ya no está disponible."
+  }
+}

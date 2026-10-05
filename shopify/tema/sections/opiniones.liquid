@@ -1,0 +1,41 @@
+{%- comment -%}
+  Usa solo opiniones REALES de tus clientes (con su permiso). Publicar reseñas inventadas
+  es publicidad engañosa según la Ley del Consumidor.
+{%- endcomment -%}
+<section class="seccion contenedor opiniones">
+  <div class="seccion__cabecera seccion__cabecera--centro">
+    <h2 class="seccion__titulo">{{ section.settings.titulo }}</h2>
+  </div>
+  <div class="opiniones__lista">
+    {%- for block in section.blocks -%}
+      <figure class="opinion" {{ block.shopify_attributes }}>
+        {%- if block.settings.foto != blank -%}
+          {{ block.settings.foto | image_url: width: 600 | image_tag: loading: 'lazy', class: 'opinion__foto', widths: '300, 600' }}
+        {%- endif -%}
+        <blockquote>{{ block.settings.texto }}</blockquote>
+        <figcaption>{{ block.settings.nombre }}</figcaption>
+      </figure>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Opiniones de clientes",
+  "class": "seccion-opiniones",
+  "settings": [{ "type": "text", "id": "titulo", "label": "Título", "default": "Lo que dicen nuestros clientes" }],
+  "blocks": [
+    {
+      "type": "opinion",
+      "name": "Opinión",
+      "settings": [
+        { "type": "paragraph", "content": "Usa solo opiniones reales de clientes, con su permiso." },
+        { "type": "image_picker", "id": "foto", "label": "Foto del cliente o su mascota" },
+        { "type": "textarea", "id": "texto", "label": "Opinión" },
+        { "type": "text", "id": "nombre", "label": "Nombre y comuna", "info": "Ej: Camila, Ñuñoa" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Opiniones de clientes" }]
+}
+{% endschema %}

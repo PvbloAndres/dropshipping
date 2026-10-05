@@ -1,0 +1,89 @@
+<dialog class="carrito-lateral" data-carrito-lateral aria-label="{{ 'carrito.titulo' | t }}">
+  <div class="carrito-lateral__cabecera">
+    <h2>{{ 'carrito.titulo' | t }}</h2>
+    <button type="button" class="boton-icono" data-cerrar-carrito aria-label="{{ 'general.cerrar' | t }}">
+      {% render 'icono', nombre: 'cerrar' %}
+    </button>
+  </div>
+
+  <div class="carrito-lateral__contenido" data-carrito-contenido data-cantidad-total="{{ cart.item_count }}">
+    {%- if cart.item_count > 0 -%}
+      <div class="carrito-lateral__desplazable">
+      <ul class="carrito-lateral__lineas">
+        {%- for item in cart.items -%}
+          {% render 'linea-carrito', item: item, linea: forloop.index %}
+        {%- endfor -%}
+      </ul>
+
+      {%- liquid
+        assign ids_en_carrito = cart.items | map: 'product_id'
+        assign sugeridos = 0
+      -%}
+      {%- capture lista_sugeridos -%}
+        {%- for producto in section.settings.sugeridos -%}
+          {%- if ids_en_carrito contains producto.id or producto.available == false or producto.has_only_default_variant == false -%}
+            {%- continue -%}
+          {%- endif -%}
+          {%- assign sugeridos = sugeridos | plus: 1 -%}
+          <li class="sugerido">
+            {%- if producto.featured_media -%}
+              {{ producto.featured_media | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}
+            {%- endif -%}
+            <span class="sugerido__info">
+              {{ producto.title }}
+              <strong>{{ producto.price | money }}</strong>
+            </span>
+            {%- form 'product', producto, data-agregar-carrito: '', data-sin-abrir: '' -%}
+              <input type="hidden" name="id" value="{{ producto.selected_or_first_available_variant.id }}">
+              <button type="submit" class="boton boton--chico">{% render 'icono', nombre: 'mas' %} {{ 'carrito.agregar_corto' | t }}</button>
+            {%- endform -%}
+          </li>
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- if sugeridos > 0 -%}
+        <div class="carrito-lateral__sugeridos">
+          <p class="carrito-lateral__sugeridos-titulo">{{ section.settings.titulo_sugeridos }}</p>
+          <ul>{{ lista_sugeridos }}</ul>
+        </div>
+      {%- endif -%}
+      </div>
+
+      <div class="carrito-lateral__pie">
+        <p class="carrito-lateral__total">
+          <span>{{ 'carrito.total' | t }}</span>
+          <strong>{{ cart.total_price | money }}</strong>
+        </p>
+        <p class="carrito-lateral__nota">{{ section.settings.nota }}</p>
+        <form action="{{ routes.cart_url }}" method="post">
+          <button type="submit" name="checkout" class="boton boton--grande boton--ancho">
+            {{ 'carrito.pagar' | t }} {% render 'icono', nombre: 'flecha' %}
+          </button>
+        </form>
+      </div>
+    {%- else -%}
+      <div class="carrito-lateral__vacio">
+        <p>{{ 'carrito.vacio' | t }}</p>
+        <a class="boton" href="{{ routes.all_products_collection_url }}">{{ 'carrito.seguir_comprando' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+
+</dialog>
+
+{% schema %}
+{
+  "name": "Carrito lateral",
+  "class": "seccion-carrito-lateral",
+  "settings": [
+    { "type": "text", "id": "nota", "label": "Nota bajo el total", "default": "Envío incluido · Pago seguro" },
+    {
+      "type": "product_list",
+      "id": "sugeridos",
+      "label": "\"Llévate también\"",
+      "info": "Productos baratos de una sola variante que se ofrecen dentro del carrito. Elige productos del mismo proveedor para que viajen en el mismo paquete.",
+      "limit": 4
+    },
+    { "type": "text", "id": "titulo_sugeridos", "label": "Título de las sugerencias", "default": "Llévate también" }
+  ]
+}
+{% endschema %}

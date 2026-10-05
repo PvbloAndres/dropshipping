@@ -1,0 +1,34 @@
+<section class="seccion contenedor como-funciona">
+  <div class="seccion__cabecera seccion__cabecera--centro">
+    <h2 class="seccion__titulo">{{ section.settings.titulo }}</h2>
+  </div>
+  <ol class="como-funciona__pasos">
+    {%- for block in section.blocks -%}
+      <li class="como-funciona__paso" {{ block.shopify_attributes }}>
+        <span class="como-funciona__numero">{{ forloop.index }}</span>
+        <h3>{{ block.settings.titulo }}</h3>
+        <p>{{ block.settings.texto }}</p>
+      </li>
+    {%- endfor -%}
+  </ol>
+</section>
+
+{% schema %}
+{
+  "name": "Cómo funciona",
+  "class": "seccion-como-funciona",
+  "max_blocks": 4,
+  "settings": [{ "type": "text", "id": "titulo", "label": "Título", "default": "Comprar es fácil" }],
+  "blocks": [
+    {
+      "type": "paso",
+      "name": "Paso",
+      "settings": [
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Elige tu producto" },
+        { "type": "textarea", "id": "texto", "label": "Texto", "default": "Agrégalo al carrito en un par de toques." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Cómo funciona", "blocks": [{ "type": "paso" }, { "type": "paso" }, { "type": "paso" }] }]
+}
+{% endschema %}

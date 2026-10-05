@@ -1,0 +1,26 @@
+{%- liquid
+  assign titulos = settings.fuente_titulos
+  assign titulos_negrita = settings.fuente_titulos | font_modify: 'weight', '700'
+  assign texto = settings.fuente_texto
+  assign texto_negrita = settings.fuente_texto | font_modify: 'weight', '700'
+-%}
+{% style %}
+  {{ titulos | font_face: font_display: 'swap' }}
+  {{ titulos_negrita | font_face: font_display: 'swap' }}
+  {{ texto | font_face: font_display: 'swap' }}
+  {{ texto_negrita | font_face: font_display: 'swap' }}
+
+  :root {
+    --fondo: {{ settings.color_fondo }};
+    --superficie: {{ settings.color_superficie }};
+    --texto: {{ settings.color_texto }};
+    --acento: {{ settings.color_acento }};
+    --acento-texto: {{ settings.color_acento_texto }};
+    --suave: {{ settings.color_suave }};
+    --oferta: {{ settings.color_oferta }};
+    --fuente-titulos: {{ titulos.family }}, {{ titulos.fallback_families }};
+    --peso-titulos: {% if titulos_negrita %}{{ titulos_negrita.weight }}{% else %}{{ titulos.weight }}{% endif %};
+    --fuente-texto: {{ texto.family }}, {{ texto.fallback_families }};
+    --peso-texto: {{ texto.weight }};
+  }
+{% endstyle %}

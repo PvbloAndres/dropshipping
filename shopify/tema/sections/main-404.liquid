@@ -1,0 +1,9 @@
+<section class="seccion contenedor contenedor--angosto centrado">
+  <p class="seccion__etiqueta">404</p>
+  <h1 class="seccion__titulo">{{ 'general.no_encontrada' | t }}</h1>
+  <a class="boton" href="{{ routes.all_products_collection_url }}">{{ 'carrito.seguir_comprando' | t }}</a>
+</section>
+
+{% schema %}
+{ "name": "Página no encontrada", "class": "seccion-404" }
+{% endschema %}
