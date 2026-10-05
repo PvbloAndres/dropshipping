@@ -2,13 +2,13 @@
   "current": "Default",
   "presets": {
     "Default": {
-      "color_fondo": "#FBF8F3",
+      "color_fondo": "#F6F5F1",
       "color_superficie": "#FFFFFF",
-      "color_texto": "#2A2320",
-      "color_acento": "#E0612F",
+      "color_texto": "#1D2827",
+      "color_acento": "#1F6F6B",
       "color_acento_texto": "#FFFFFF",
-      "color_suave": "#FDE9DF",
-      "color_oferta": "#1F8A5B",
+      "color_suave": "#E3EEEA",
+      "color_oferta": "#B4532A",
       "fuente_titulos": "work_sans_n4",
       "fuente_texto": "work_sans_n4",
       "whatsapp": "56935835960",

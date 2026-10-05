@@ -1,5 +1,5 @@
 /* ============================================================
-   Tema Patas Contentas: carrito lateral, variantes, entrega estimada.
+   Tema Casa en Orden: carrito lateral, variantes, entrega estimada.
    window.tema (rutas, textos y plazo de entrega) se define en layout/theme.liquid.
    ============================================================ */
 

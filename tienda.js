@@ -315,7 +315,7 @@ function minusculaInicial(texto) {
 }
 
 function pintarTextos() {
-  document.title = `${TIENDA.nombre} | Accesorios para mascotas`;
+  document.title = `${TIENDA.nombre} | Orden para tu casa`;
   document.getElementById("nombre-tienda").textContent = TIENDA.nombre;
   document.getElementById("nombre-pie").textContent = TIENDA.nombre;
   document.getElementById("eslogan").textContent = TIENDA.eslogan;

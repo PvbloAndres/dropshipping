@@ -1,22 +1,22 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Patas Contentas",
+    "theme_name": "Casa en Orden",
     "theme_version": "1.0.0",
-    "theme_author": "Patas Contentas",
+    "theme_author": "Casa en Orden",
     "theme_documentation_url": "https://github.com/PvbloAndres/dropshipping",
     "theme_support_url": "https://github.com/PvbloAndres/dropshipping"
   },
   {
     "name": "Colores",
     "settings": [
-      { "type": "color", "id": "color_fondo", "label": "Fondo", "default": "#FBF8F3" },
+      { "type": "color", "id": "color_fondo", "label": "Fondo", "default": "#F6F5F1" },
       { "type": "color", "id": "color_superficie", "label": "Tarjetas y recuadros", "default": "#FFFFFF" },
-      { "type": "color", "id": "color_texto", "label": "Texto", "default": "#2A2320" },
-      { "type": "color", "id": "color_acento", "label": "Color principal (botones)", "default": "#E0612F" },
+      { "type": "color", "id": "color_texto", "label": "Texto", "default": "#1D2827" },
+      { "type": "color", "id": "color_acento", "label": "Color principal (botones)", "default": "#1F6F6B" },
       { "type": "color", "id": "color_acento_texto", "label": "Texto de los botones", "default": "#FFFFFF" },
-      { "type": "color", "id": "color_suave", "label": "Fondo suave (fotos y destacados)", "default": "#FDE9DF" },
-      { "type": "color", "id": "color_oferta", "label": "Etiquetas de descuento", "default": "#1F8A5B" }
+      { "type": "color", "id": "color_suave", "label": "Fondo suave (fotos y destacados)", "default": "#E3EEEA" },
+      { "type": "color", "id": "color_oferta", "label": "Etiquetas de descuento", "default": "#B4532A" }
     ]
   },
   {

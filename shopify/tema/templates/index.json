@@ -9,9 +9,9 @@
       },
       "block_order": ["punto-1", "punto-2", "punto-3"],
       "settings": {
-        "etiqueta": "Nuevo en Chile 🐾",
-        "titulo": "Paseos felices y una casa sin pelos",
-        "subtitulo": "<p>Productos prácticos que resuelven los problemas del día a día con tu perro o gato.</p>",
+        "etiqueta": "Nuevo en Chile",
+        "titulo": "Más espacio, menos desorden",
+        "subtitulo": "<p>Productos prácticos para ordenar tu clóset, tu cocina y tu baño. Fáciles de usar y con envío gratis a todo Chile.</p>",
         "boton": "Ver productos",
         "enlace": "/collections/all",
         "boton_2": "",
@@ -30,7 +30,7 @@
     },
     "productos": {
       "type": "coleccion-destacada",
-      "settings": { "etiqueta": "Para tu mascota", "titulo": "Nuestros productos", "cantidad": 8, "mostrar_ver_todo": true }
+      "settings": { "etiqueta": "Para tu casa", "titulo": "Nuestros productos", "cantidad": 8, "mostrar_ver_todo": true }
     },
     "como-funciona": {
       "type": "como-funciona",
@@ -47,8 +47,8 @@
       "settings": {
         "imagen_derecha": false,
         "etiqueta": "Por qué elegirnos",
-        "titulo": "Pensado para la vida real con mascotas",
-        "texto": "<p>Elegimos productos que resuelven problemas concretos: pelos en el sillón, tirones en el paseo, calor en verano. Despachamos desde Chile y te acompañamos por WhatsApp hasta que tu pedido llega.</p>",
+        "titulo": "Pensado para casas y departamentos de verdad",
+        "texto": "<p>Elegimos productos que resuelven problemas concretos: clósets que no cierran, cajones revueltos, cocinas sin espacio. Despachamos desde Chile y te acompañamos por WhatsApp hasta que tu pedido llega.</p>",
         "boton": "Ver productos",
         "enlace": "/collections/all"
       }

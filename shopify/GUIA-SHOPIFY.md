@@ -1,7 +1,7 @@
 # Guía: tu tienda de dropshipping en Shopify (Chile, 2026)
 
 Esta guía te explica **cómo funciona el negocio**, **cuánto cuesta de verdad** y **cómo dejar
-todo configurado paso a paso** con el tema `patas-contentas-tema-shopify.zip` de esta carpeta.
+todo configurado paso a paso** con el tema `casa-en-orden-tema-shopify.zip` de esta carpeta.
 
 ---
 
@@ -73,7 +73,7 @@ Nunca tocas el producto.
 | Este tema | **Gratis** | Ya está hecho |
 | Dominio propio (.cl o .com) | Opcional | Puedes partir con tunombre.myshopify.com |
 
-**Ejemplo con el arnés antitirones a $19.990:**
+**Ejemplo con las bolsas al vacío a $19.990:**
 
 | Concepto | Monto |
 |---|---|
@@ -97,7 +97,7 @@ para cambios y, más adelante, publicidad.
 
 Dropi muestra su catálogo solo con tu sesión iniciada. Hazlo así:
 
-1. **Filtra:** país Chile, solo proveedores **Verificados o Premium**, categoría Mascotas u Hogar.
+1. **Filtra:** país Chile, solo proveedores **Verificados o Premium**, categoría Hogar (organización, cocina, baño, limpieza).
 2. **Ordena por más vendidos** y anota el **stock** de tus candidatos. Vuelve en 3 días: si el stock
    bajó, el producto se está vendiendo de verdad (así funcionan los rankings como Dropdata).
 3. **Revisa la ficha:** precio proveedor, precio sugerido, flete, peso y stock (ojalá 100 o más unidades).
@@ -113,12 +113,13 @@ problema diario, se entiendan en un video y no tengan batería ni sean cosmétic
 
 | Buscar en Dropi | Por qué ahora |
 |---|---|
-| Rodillo quita pelos / cepillo autolimpiante | Muda de primavera; se ve el resultado en 5 segundos |
-| Botella bebedero de paseo, tapete refrescante | Llega el calor |
-| Arnés antitirones | Muy viral; ojo con las tallas |
-| Alfombra olfativa, juguetes que sueltan premios | Regalo de Navidad para mascotas |
-| Bolsas al vacío y organizadores | Cambio de ropa de temporada; departamentos chicos |
-| Picador de verduras manual, organizadores de cocina | Se demuestran fácil en video |
+| Bolsas al vacío con bomba manual | Cambio de ropa de temporada; el antes y después es muy visual |
+| Organizadores de cajones y clóset | Departamentos chicos; se ve el resultado en 10 segundos |
+| Organizadores de refrigerador y despensa | Videos de "refri ordenado" muy populares |
+| Picador de verduras manual | Se demuestra en 5 segundos |
+| Repisas y ganchos adhesivos | Arriendos: la gente no puede perforar |
+| Cepillos para rieles y rendijas | Aseo de primavera; el "qué asco" del antes vende |
+| Packs (clóset, cocina) | Suben el valor del pedido y sirven de regalo en Navidad |
 
 **Evita** lo que se enchufa o tiene batería (necesita certificación SEC), cosméticos y suplementos
 (registro en el ISP), alimentos (SAG) y lo que el retail vende más barato.
@@ -136,7 +137,7 @@ Marca cada paso cuando lo termines.
 - [ ] Al terminar los 3 días, elige el plan **Basic** para tomar la oferta de US$1 al mes.
 
 ### B. Subir el tema
-- [ ] Descarga `patas-contentas-tema-shopify.zip` desde esta carpeta del repositorio
+- [ ] Descarga `casa-en-orden-tema-shopify.zip` desde esta carpeta del repositorio
       (en GitHub: abre el archivo → botón de descarga).
 - [ ] En Shopify: **Tienda online → Temas → Agregar tema → Subir archivo zip** y elige el .zip.
 - [ ] Cuando termine de subir, toca **Publicar**.
@@ -146,7 +147,7 @@ Marca cada paso cuando lo termines.
     "Pide hoy y recíbelo entre el … y el …" con ese plazo.
   - **Colores y Tipografía:** los colores de tu marca.
   - **Encabezado:** sube tu logo.
-  - **Portada:** cambia el título y **sube una foto real** de una mascota usando tu producto.
+  - **Portada:** cambia el título y **sube una foto real** de un clóset o cocina ordenados con tu producto.
   - **Carrito lateral → "Llévate también":** elige 1 a 3 productos baratos para ofrecer dentro del carrito.
 
 ### C. Menús
@@ -252,7 +253,7 @@ Sin clientes no hay negocio. El orden recomendado:
 | "Llévate también" en el carrito | Sube el valor de cada pedido |
 | Fecha estimada de entrega | Da confianza: "recíbelo entre el miércoles y el viernes" |
 | Barra de compra fija en celulares | El botón de compra siempre a mano al bajar por la página |
-| Selector de tallas | Para el arnés y otros productos con variantes |
+| Selector de variantes | Para colores, tamaños o packs (por ejemplo, 8 o 12 bolsas) |
 | Botón "Comprar ahora" | Lleva directo al pago, ideal para la compra por impulso |
 | Botón flotante de WhatsApp | Responde dudas y cierra ventas |
 | Productos relacionados | Sugerencias automáticas de Shopify en cada producto |

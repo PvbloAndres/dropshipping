@@ -1,25 +1,25 @@
 :root {
-  --fondo: #fbf8f3;
+  --fondo: #f6f5f1;
   --superficie: #ffffff;
-  --texto: #2a2320;
-  --suave: #6f6560;
-  --acento: #e0612f;
+  --texto: #1d2827;
+  --suave: #5c6866;
+  --acento: #1f6f6b;
   --acento-texto: #ffffff;
-  --acento-suave: #fde9df;
-  --borde: #ece5dc;
+  --acento-suave: #e3eeea;
+  --borde: #e2e5df;
   --whatsapp: #25d366;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --fondo: #1a1715;
-    --superficie: #24201d;
-    --texto: #f4efe9;
-    --suave: #b3a9a1;
-    --acento: #ff8a5b;
-    --acento-texto: #1a1715;
-    --acento-suave: #3a2a22;
-    --borde: #3a332e;
+    --fondo: #121716;
+    --superficie: #1b2221;
+    --texto: #e9eeec;
+    --suave: #9fabaa;
+    --acento: #5cc4bb;
+    --acento-texto: #0f1514;
+    --acento-suave: #1f3532;
+    --borde: #2c3634;
   }
 }
 

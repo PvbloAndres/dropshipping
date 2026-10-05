@@ -1,13 +1,13 @@
-# Patas Contentas: tienda de dropshipping con $0
+# Casa en Orden: tienda de dropshipping con $0
 
-Tienda en línea gratuita de accesorios para perros y gatos, pensada para Chile.
+Tienda en línea gratuita de productos de hogar y organización, pensada para Chile.
 Los clientes arman su carrito y el pedido te llega a WhatsApp. Cobras primero (transferencia o
 Mercado Pago) o usas pago contra entrega con Dropi, y el proveedor despacha. No pones dinero propio.
 
 📋 **El estudio de mercado, el proveedor, el plan de contenido y la operación diaria están en [PLAN.md](PLAN.md).**
 
 🛍️ **¿Prefieres Shopify?** En [`shopify/`](shopify/) está el tema listo para subir
-(`patas-contentas-tema-shopify.zip`) y la guía paso a paso [GUIA-SHOPIFY.md](shopify/GUIA-SHOPIFY.md).
+(`casa-en-orden-tema-shopify.zip`) y la guía paso a paso [GUIA-SHOPIFY.md](shopify/GUIA-SHOPIFY.md).
 
 ## Ponla en línea (10 minutos)
 
@@ -47,7 +47,7 @@ precio desde el navegador. Corre gratis en Cloudflare Workers.
 
 ### Paso 2: servidor gratis en Cloudflare
 1. Crea una cuenta gratis en **dash.cloudflare.com**.
-2. Ve a **Workers & Pages → Create → Create Worker**, ponle de nombre `patas-pagos` y toca **Deploy**.
+2. Ve a **Workers & Pages → Create → Create Worker**, ponle de nombre `casa-pagos` y toca **Deploy**.
 3. Toca **Edit code**, borra todo, pega el contenido de `pagos/worker.js` y toca **Deploy**.
 4. Ve a **Storage & Databases → KV → Create** y crea un espacio llamado `pedidos`.
 5. Vuelve a tu worker → **Settings → Bindings → Add → KV namespace**. En nombre de variable escribe
@@ -56,14 +56,14 @@ precio desde el navegador. Corre gratis en Cloudflare Workers.
    - `TIENDA_URL` (tipo Text): `https://pvbloandres.github.io/dropshipping/`
    - `MP_ACCESS_TOKEN` (tipo Secret): tu Access Token del paso 1
    - `CLAVE_ADMIN` (tipo Secret): una contraseña que inventes para ver tus pedidos
-7. Copia la dirección de tu worker (algo como `https://patas-pagos.tu-usuario.workers.dev`).
+7. Copia la dirección de tu worker (algo como `https://casa-pagos.tu-usuario.workers.dev`).
 
 ### Paso 3: conectar la tienda
 En `productos.js` pega esa dirección en `urlPagos`. Desde ese momento el carrito muestra
 **"Pagar ahora"** y, al pagar, el cliente vuelve a la tienda con la confirmación.
 
 ### Tus pedidos
-Abre `https://patas-pagos.tu-usuario.workers.dev/pedidos?clave=TU_CLAVE_ADMIN` (guárdalo en favoritos).
+Abre `https://casa-pagos.tu-usuario.workers.dev/pedidos?clave=TU_CLAVE_ADMIN` (guárdalo en favoritos).
 Verás cada pedido con nombre, teléfono, dirección, productos y estado. **Despacha solo los que dicen
 "✅ pagado"**: ese estado lo confirma Mercado Pago directamente, no el navegador del cliente.
 

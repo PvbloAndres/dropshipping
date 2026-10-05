@@ -50,7 +50,7 @@
   },
   "busqueda": {
     "titulo": "Buscar",
-    "placeholder": "¿Qué buscas para tu mascota?",
+    "placeholder": "¿Qué buscas para tu casa?",
     "resultados": {
       "one": "1 resultado para \"{{ termino }}\"",
       "other": "{{ count }} resultados para \"{{ termino }}\""
