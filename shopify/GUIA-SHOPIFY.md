@@ -179,6 +179,7 @@ Marca cada paso cuando lo termines.
 - [ ] Desde ese momento, cada venta de Shopify pasa sola a Dropi (cada 5 a 10 minutos).
 
 ### G. Políticas (obligatorio por ley)
+- [ ] Los textos ya están escritos para Chile en [`POLITICAS.md`](POLITICAS.md): solo cópialos y pégalos.
 - [ ] **Configuración → Políticas:** crea con las plantillas de Shopify la política de reembolso,
       de privacidad, de envío y los términos. Adáptalas a Chile:
   - **Derecho a retracto:** 10 días desde que el cliente recibe el producto.
