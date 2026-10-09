@@ -11,7 +11,7 @@
       "settings": {
         "etiqueta": "Nuevo en Chile",
         "titulo": "Más espacio, menos desorden",
-        "subtitulo": "<p>Productos prácticos para ordenar tu clóset, tu cocina y tu baño. Fáciles de usar y con envío gratis a todo Chile.</p>",
+        "subtitulo": "<p>Productos prácticos para tu cocina, tu terraza y tu casa. Envío gratis a todo Chile.</p>",
         "boton": "Ver productos",
         "enlace": "/collections/all",
         "boton_2": "",
@@ -48,7 +48,7 @@
         "imagen_derecha": false,
         "etiqueta": "Por qué elegirnos",
         "titulo": "Pensado para casas y departamentos de verdad",
-        "texto": "<p>Elegimos productos que resuelven problemas concretos: clósets que no cierran, cajones revueltos, cocinas sin espacio. Despachamos desde Chile y te acompañamos por WhatsApp hasta que tu pedido llega.</p>",
+        "texto": "<p>Elegimos productos que resuelven problemas concretos: cocinas sin espacio, patios a oscuras y arreglos que siempre quedan pendientes. Despachamos desde Chile y te acompañamos por WhatsApp hasta que tu pedido llega.</p>",
         "boton": "Ver productos",
         "enlace": "/collections/all"
       }
