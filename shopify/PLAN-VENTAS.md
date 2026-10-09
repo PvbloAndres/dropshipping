@@ -81,3 +81,22 @@ la publicidad. Si no hay ventas, se apaga.
 - Precios "antes $XX" inventados o reseñas falsas: es publicidad engañosa (SERNAC).
 - Prometer plazos de entrega que el proveedor no cumple.
 - Agregar 50 productos: es mejor tener 6 bien presentados y probar cuál vende.
+
+## 9. Página de producto que vende (estilo "tienda de un producto")
+
+Cada producto ya tiene su página armada así (se genera con `descripciones/generar.py`):
+
+1. **Pregunta con el problema** en grande ("¿Tu despensa está llena de paquetes abiertos?") y 3 beneficios con ✅.
+2. **Sellos de confianza:** envío gratis, pago seguro con Flow, 10 días para arrepentirse.
+3. **Oferta de pack real:** "Lleva 2 o más y ahorra 10%" (descuento automático activo en Shopify).
+4. **Beneficios** explicados en una línea cada uno.
+5. **"Ideal para"** con íconos.
+6. **"Así llega tu pedido"** en 3 pasos.
+7. **Preguntas frecuentes** desplegables.
+8. **Compra protegida:** retracto y garantía legal.
+
+**Lo que NO copiamos de los videos de "tiendas que venden":** contadores falsos ("88 personas viendo
+ahora"), "stock limitado" cuando no lo es, cuentas regresivas que se reinician, precios tachados
+inventados y reseñas o comentarios de Facebook falsos. En Chile es publicidad engañosa (Ley 19.496)
+y el SERNAC multa por eso. Usa una cuenta regresiva solo cuando la oferta termine de verdad (por
+ejemplo, Black Friday) y reseñas solo de clientes reales (app gratis Judge.me).
