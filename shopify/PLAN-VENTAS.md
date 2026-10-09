@@ -12,6 +12,7 @@ publicar contenido que muestre el problema → el producto resolviéndolo → el
 | Escurridor de platos | $26.990 | "Se acabaron los charcos en el mesón" | Platos amontonados mojando todo → escurridor ordenado |
 | Guirnalda LED solar 30 m | $24.990 | "Decoré mi casa para Navidad sin gastar en luz" | De día: se instala. De noche: todo iluminado |
 | Manguera LED solar 10 m | $16.990 | "Mi terraza de noche con $16.990" | Terraza oscura → se encienden las luces |
+| Rociador giratorio 360° | $17.990 | "Mi jardín se riega solo" | Regar con manguera a mano → poner el rociador → pasto regado en círculo |
 | Kit herramientas 15 piezas | $27.990 | "El regalo que todo el que vive solo necesita" | Buscar destornillador en toda la casa → abrir el kit |
 
 **Cómo grabar sin tener el producto:** usa los videos y fotos del proveedor (en Dropi), graba tu

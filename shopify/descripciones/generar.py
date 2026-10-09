@@ -136,6 +136,18 @@ P = {
   faq=[("¿Cuánto le cabe?","Aproximadamente 8 pocillos, 5 platos, 4 tazas y 15 cubiertos."),
        ("¿Moja el mesón?","No, la bandeja recolectora junta el agua."),
        FAQ_ENVIO, FAQ_PAGO]),
+"15388110127295": dict(  # Rociador giratorio 360° (Dropi 35054)
+  q="¿Regar el jardín te quita tiempo todos los días?", sub="Riega solo mientras haces otra cosa.",
+  checks=["Gira 360° y riega en círculo","3 brazos que reparten el agua","Funciona sin electricidad"],
+  ben=[("Riega solo","Lo conectas a la manguera, abres la llave y el rociador gira repartiendo el agua."),
+       ("Riego parejo","Sus 3 brazos giran 360° para regar todo alrededor, no solo un punto."),
+       ("Sin instalación","Lo dejas sobre el pasto con su base circular y listo. Lo cambias de lugar cuando quieras."),
+       ("Listo para el verano","Mantén tu pasto verde y tus plantas regadas cuando más calor hace.")],
+  uses=[("🌱","Pasto"),("🌸","Flores"),("🥬","Huerto"),("🏡","Patio")],
+  inc=["1 rociador giratorio de 3 brazos con base circular"],
+  faq=[("¿Necesita electricidad?","No. Gira solo con la presión del agua de tu manguera."),
+       ("¿Viene con manguera?","No. Se conecta a la manguera de jardín que ya tienes."),
+       FAQ_ENVIO, FAQ_PAGO]),
 }
 
 res = {}
