@@ -102,3 +102,39 @@ ahora"), "stock limitado" cuando no lo es, cuentas regresivas que se reinician, 
 inventados y reseñas o comentarios de Facebook falsos. En Chile es publicidad engañosa (Ley 19.496)
 y el SERNAC multa por eso. Usa una cuenta regresiva solo cuando la oferta termine de verdad (por
 ejemplo, Black Friday) y reseñas solo de clientes reales (app gratis Judge.me).
+
+## 10. Contenido siendo intermediario (sin tener los productos)
+
+**De dónde sacar el material:** en Dropi, abre el producto → pestaña **"Recursos adicionales"** (y el botón
+de descarga). Ahí el proveedor deja fotos y videos para que los uses.
+
+**5 formatos que funcionan sin tener el producto:**
+
+| Formato | Cómo se hace |
+|---|---|
+| Video del proveedor + texto | Cortas lo mejor del video del proveedor en CapCut y pones un gancho grande arriba y subtítulos |
+| Carrusel de fotos (modo foto de TikTok) | 4 a 6 fotos del proveedor, una idea por foto, la última con precio y "envío gratis" |
+| Pantalla verde | Efecto "Green screen" de TikTok: apareces tú (o solo tu voz) delante de la foto del producto: "Encontré esto para…" |
+| Lista "Top 3" | "3 cosas para tu terraza por menos de $20.000": una foto o clip por producto |
+| Voz en off | Si no quieres salir: la voz automática de CapCut (texto a voz) leyendo el guion |
+
+**Reglas:**
+- No digas "así quedó mi casa" si el video es del proveedor: di "mira cómo funciona". Hacerlo pasar por
+  tuyo es publicidad engañosa.
+- No subas videos de otros vendedores de TikTok: es contenido ajeno y TikTok baja el alcance de lo repetido.
+- **Muestras baratas:** Dropi tiene el botón **"Solicitar muestra"**. El foco ($2.990), el rociador ($3.900)
+  y la manguera ($4.500) cuestan poco: pedir 1 de cada uno para grabar videos reales sigue siendo ser
+  intermediario (no guardas stock) y es la mejor inversión en contenido que puedes hacer.
+- Cuando un cliente reciba su pedido, pídele un video corto usándolo (con permiso, lo publicas).
+
+**Semana tipo (publicar entre 19:00 y 21:00):**
+
+| Día | Producto | Formato | Gancho |
+|---|---|---|---|
+| Lunes | Foco solar | Video del proveedor + texto | "Esta luz se prende sola cuando llegas 👀" |
+| Martes | Rociador | Carrusel de fotos | "Tu jardín se riega solo: 3 razones para tener esto en verano" |
+| Miércoles | Set utensilios | Pantalla verde | "Lo primero que necesitas si te vas a vivir solo" |
+| Jueves | Contenedores | Video del proveedor (antes y después) | "Despensa antes vs. después" |
+| Viernes | Guirnalda | Video del proveedor de noche | "Decoración de Navidad que no sube la cuenta de la luz" |
+| Sábado | Manguera + rociador + foco | Top 3 en carrusel | "3 cosas para tu terraza por menos de $20.000" |
+| Domingo | Kit herramientas | Voz en off | "El regalo de Navidad que sí van a usar" |
