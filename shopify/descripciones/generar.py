@@ -148,6 +148,18 @@ P = {
   faq=[("¿Necesita electricidad?","No. Gira solo con la presión del agua de tu manguera."),
        ("¿Viene con manguera?","No. Se conecta a la manguera de jardín que ya tienes."),
        FAQ_ENVIO, FAQ_PAGO]),
+"15388115566783": dict(  # Foco solar 20 LED con sensor (Dropi 26522)
+  q="¿Llegas de noche y tu patio está a oscuras?", sub="Una luz que se enciende sola cuando pasas, sin cables ni cuenta de la luz.",
+  checks=["20 LED de luz blanca","Sensor de movimiento","Se carga con el sol"],
+  ben=[("Se enciende sola","Su sensor detecta el movimiento y prende la luz cuando alguien pasa."),
+       ("No pagas luz","El panel solar se carga de día. No necesitas enchufes ni cables."),
+       ("Fácil de instalar","Se cuelga en la pared y queda lista. No necesitas electricista."),
+       ("Más seguridad","Ilumina la entrada, el pasillo o el patio cuando más lo necesitas.")],
+  uses=[("🚪","Entrada"),("🚗","Estacionamiento"),("🌿","Patio"),("🧱","Pasillos")],
+  inc=["1 foco solar de 20 LED con sensor de movimiento"],
+  faq=[("¿Necesita enchufe o pilas?","No. Se carga con el panel solar que trae incorporado."),
+       ("¿Dónde lo instalo?","En una pared donde le llegue sol directo durante el día. Mientras más sol recibe, más rinde en la noche."),
+       FAQ_ENVIO, FAQ_PAGO]),
 }
 
 res = {}
